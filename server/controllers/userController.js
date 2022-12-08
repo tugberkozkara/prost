@@ -1,36 +1,26 @@
-const express = require('express');
-var bodyParser = require('body-parser');
-
-const User = require('../models/user');
-
-var router = express.Router();
-var jsonParser = bodyParser.json();
+import User from '../models/user.js';
 
 
-router.get('/', async(req, res) => {
-    const allUsers = await User.find();
-    res.status(200).json(allUsers);
-});
-
-router.post('/create', jsonParser, (req, res) => {
-    console.log(req.body);
-    if(!req.body._id){
-        createUser(req, res);
+export const getUsers = async (req, res) => {
+    try {
+        const allUsers = await User.find();
+        res.status(200).json(allUsers);
+    } catch (error) {
+        throw error.message;
     }
-    // Update can be added here later
-})
+}
 
 
-function createUser(req, res){
+export const createUser = (req, res) => {
     const user = new User({
         email: req.body.email,
         username: req.body.username,
         password: req.body.password
     })
     user.save((err, doc) => {
-        if(err) res.status(400);
+        if(err){
+            res.status(400);
+        }
         res.status(201).json("Created successfully!");
     });
 }
-
-module.exports = router;

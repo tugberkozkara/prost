@@ -1,27 +1,17 @@
-const express = require('express');
-var bodyParser = require('body-parser');
-
-const Place = require('../models/place');
-const { Model } = require('mongoose');
-
-var router = express.Router();
-var jsonParser = bodyParser.json();
+import Place from '../models/place.js';
 
 
-router.get('/', async(req, res) => {
-    const allPlaces = await Place.find();
-    res.status(200).json(allPlaces);
-});
-
-router.post('/', jsonParser, (req, res) => {
-    console.log(req.body);
-    if(!req.body._id){
-        createPlace(req, res);
+export const getPlaces = async (req, res) => {
+    try {
+        const allPlaces = await Place.find();
+        res.status(200).json(allPlaces);
+    } catch (error) {
+        throw error.message;
     }
-})
+}
 
 
-function createPlace(req, res){
+export const createPlace = (req, res) => {
     const place = new Place({
         _id: req.body._id,
         name: req.body.name,
@@ -38,6 +28,3 @@ function createPlace(req, res){
         res.status(201).json("Created successfully!");
     });
 }
-
-
-module.exports = router;
