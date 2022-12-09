@@ -6,7 +6,9 @@ export const getPlaces = async (req, res) => {
         const allPlaces = await Place.find();
         res.status(200).json(allPlaces);
     } catch (error) {
-        throw error.message;
+        res.status(404).json({
+            message: error.message,
+        })
     }
 }
 

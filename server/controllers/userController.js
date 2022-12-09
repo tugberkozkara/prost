@@ -6,7 +6,9 @@ export const getUsers = async (req, res) => {
         const allUsers = await User.find();
         res.status(200).json(allUsers);
     } catch (error) {
-        throw error.message;
+        res.status(404).json({
+            message: error.message,
+        })
     }
 }
 
