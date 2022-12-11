@@ -1,19 +1,19 @@
 import Place from '../models/place.js';
 
 
-export const getPlaces = async (request, result) => {
+export const getPlaces = async (request, response) => {
     try {
         const allPlaces = await Place.find();
-        result.status(200).json(allPlaces);
+        response.status(200).json(allPlaces);
     } catch (error) {
-        result.status(404).json({
+        response.status(404).json({
             message: error.message,
         })
     }
 }
 
 
-export const createPlace = (request, result) => {
+export const createPlace = (request, response) => {
     const place = new Place({
         _id: request.body._id,
         name: request.body.name,
@@ -27,9 +27,9 @@ export const createPlace = (request, result) => {
         place.save();
     } catch (error) {
         console.log(error)
-        result.status(400).json({
+        response.status(400).json({
             message: error.message,
         })
     }
-    result.status(201).json("Created successfully!");
+    response.status(201).json("Created successfully!");
 }
