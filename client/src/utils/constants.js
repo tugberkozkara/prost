@@ -1,0 +1,1 @@
+export const API_URL_PLACES_GET_POST = "http://127.0.0.1:5000/places";
