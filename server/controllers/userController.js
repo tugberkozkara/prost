@@ -1,28 +1,30 @@
 import User from '../models/user.js';
 
 
-export const getUsers = async (req, res) => {
+export const getUsers = async (request, result) => {
     try {
         const allUsers = await User.find();
-        res.status(200).json(allUsers);
+        result.status(200).json(allUsers);
     } catch (error) {
-        res.status(404).json({
+        result.status(404).json({
             message: error.message,
         })
     }
 }
 
 
-export const createUser = (req, res) => {
+export const createUser = (request, result) => {
     const user = new User({
-        email: req.body.email,
-        username: req.body.username,
-        password: req.body.password
+        email: request.body.email,
+        username: request.body.username,
+        password: request.body.password
     })
     user.save((err, doc) => {
         if(err){
-            res.status(400);
+            result.status(404).json({
+                message: error.message,
+            })
         }
-        res.status(201).json("Created successfully!");
+        result.status(201).json("Created successfully!");
     });
 }

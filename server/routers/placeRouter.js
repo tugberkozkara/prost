@@ -7,10 +7,10 @@ var jsonParser = bodyParser.json();
 
 router.get('/', getPlaces);
 
-router.post('/', jsonParser, (req, res) => {
-    console.log(req.body);
-    if(!req.body._id){
-        createPlace(req, res);
+router.post('/', jsonParser, (request, result) => {
+    console.log(request.body);
+    if(!request.body._id){
+        createPlace(request, result);
     }
 })
 

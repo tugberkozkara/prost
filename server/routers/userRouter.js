@@ -7,10 +7,10 @@ var jsonParser = bodyParser.json();
 
 router.get('/', getUsers);
 
-router.post('/', jsonParser, (req, res) => {
-    console.log(req.body);
-    if(!req.body._id){
-        createUser(req, res);
+router.post('/', jsonParser, (request, result) => {
+    console.log(request.body);
+    if(!request.body._id){
+        createUser(request, result);
     }
 })
 
