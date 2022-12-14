@@ -1,17 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { getUsers, createUser } from '../controllers/userController.js'
+import UserController from '../controllers/userController.js'
 
 var router = express.Router();
 var jsonParser = bodyParser.json();
 
-router.get('/', getUsers);
+router.get('/', UserController.getUsers);
 
-router.post('/', jsonParser, (request, response) => {
-    console.log(request.body);
-    if(!request.body._id){
-        createUser(request, response);
-    }
-})
+router.post('/', jsonParser, UserController.createUser);
 
 export default router;
