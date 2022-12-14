@@ -17,18 +17,22 @@ export default class UserController{
 
     static createUser = async (request, response) => {
 
-        const isUserExists = await User.exists({email: request.body.email});
+        const {email, username, password} = request.body;
+
+        const isUserExists = await User.exists({email: email});
         if(isUserExists){
             return response.status(400).json({
                 message: "Email already registered!",
             })
         }
 
-        const hashedPassword = await bcrypt.hash(request.body.password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const lastLoginDate = Date.now();
         const user = new User({
-            email: request.body.email,
-            username: request.body.username,
-            password: hashedPassword
+            email: email,
+            username: username,
+            password: hashedPassword,
+            lastLoginDate: lastLoginDate
         })
 
         try {
@@ -39,6 +43,36 @@ export default class UserController{
             })
         }
         return response.status(201).json("Created successfully!");
+    }
+
+
+    static loginUser = async (request, response) => {
+        const {username, password} = request.body;
+        const user = await User.findOne({username: username});
+        if(!user){
+            return response.status(403).json({
+                message: "Username or password is incorrect!",
+            })
+        }
+
+        const isPasswordTrue = await bcrypt.compare(password, user.password);
+        if(!isPasswordTrue){
+            return response.status(403).json({
+                message: "Username or password is incorrect!",
+            })
+        }
+
+        const lastLoginDate = Date.now();
+
+        try {
+            await user.updateOne({lastLoginDate: lastLoginDate});
+        } catch (error) {
+            console.log(error.message);
+        }
+
+        return response.status(200).json({
+            message: "Login successful!",
+        })
     }
 
 }

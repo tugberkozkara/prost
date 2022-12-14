@@ -6,7 +6,7 @@ var router = express.Router();
 var jsonParser = bodyParser.json();
 
 router.get('/', UserController.getUsers);
-
-router.post('/', jsonParser, UserController.createUser);
+router.post('/register', jsonParser, UserController.createUser);
+router.post('/login', jsonParser, UserController.loginUser);
 
 export default router;
