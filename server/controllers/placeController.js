@@ -1,8 +1,9 @@
+import ResponseHandler from '../handlers/responseHandler.js';
 import Place from '../models/place.js';
 
 export default class PlaceController{
     
-    static getPlaces = async (request, response) => {
+    static getAllPlaces = async (request, response) => {
         try {
             const allPlaces = await Place.find();
             response.status(200).json(allPlaces);
@@ -37,7 +38,18 @@ export default class PlaceController{
                 message: error.message,
             })
         }
-        return response.status(201).json("Created successfully!");
+        return ResponseHandler.Created(request, response);
     }
 
+
+    static getPlace = async (request, response) => {
+        const { placeId } = request.params;
+        const place = await Place.findOne({_id: placeId});
+        
+        if(!place){
+            return ResponseHandler.NotFound(request, response);
+        }
+
+        return ResponseHandler.OK(request, response, place);
+    }
 }
