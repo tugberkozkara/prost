@@ -5,7 +5,7 @@ import UserController from '../controllers/userController.js'
 var router = express.Router();
 var jsonParser = bodyParser.json();
 
-router.get('/', UserController.getUsers);
+router.get('/', UserController.getAllUsers);
 router.post('/register', jsonParser, UserController.createUser);
 router.post('/login', jsonParser, UserController.loginUser);
 
