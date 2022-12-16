@@ -18,13 +18,14 @@ app.listen(5000, () =>{
 app.get("/", (request, response) => {
     return response.status(404).json({
         message: "Not found!",
-    })
+    });
 });
+
+app.use('/users', userRouter);
+app.use('/places', placeRouter);
 
 app.use('*', (request, response) => {
     return response.status(404).json({
         message: "Not found!",
-    })})
-
-app.use('/users', userRouter);
-app.use('/places', placeRouter);
+    });
+})
