@@ -22,6 +22,10 @@ const placeSchema = new mongoose.Schema({
           type: String,
           required: false
      },
+     image:{
+          data: Buffer,
+          contentType: String
+     },
      tags : [{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Tag',

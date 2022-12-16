@@ -1,4 +1,3 @@
-import ResponseHandler from '../handlers/responseHandler.js';
 import Place from '../models/place.js';
 
 export default class PlaceController{
@@ -38,7 +37,9 @@ export default class PlaceController{
                 message: error.message,
             })
         }
-        return ResponseHandler.Created(request, response);
+        return response.status(201).json({
+            message: "Created successfully!",
+        });
     }
 
 
@@ -47,9 +48,11 @@ export default class PlaceController{
         const place = await Place.findOne({_id: placeId});
         
         if(!place){
-            return ResponseHandler.NotFound(request, response);
+            return response.status(404).json({
+                message: "Not found!",
+            });
         }
 
-        return ResponseHandler.OK(request, response, place);
+        return response.status(200).json(place);
     }
 }

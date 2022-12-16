@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import ResponseHandler from '../handlers/responseHandler.js';
 import User from '../models/user.js';
 
 export default class UserController{
@@ -43,7 +42,9 @@ export default class UserController{
                 message: error.message,
             })
         }
-        return ResponseHandler.Created(request, response);
+        return response.status(201).json({
+            message: "Created successfully!",
+        });
     }
 
 
@@ -51,12 +52,16 @@ export default class UserController{
         const {username, password} = request.body;
         const user = await User.findOne({username: username});
         if(!user){
-            return ResponseHandler.Forbidden(request, response);
+            return response.status(403).json({
+                message: "Username or password is incorrect!",
+            });
         }
 
         const isPasswordTrue = await bcrypt.compare(password, user.password);
         if(!isPasswordTrue){
-            return ResponseHandler.Forbidden(request, response);
+            return response.status(403).json({
+                message: "Username or password is incorrect!",
+            });
         }
 
         const lastLoginDate = Date.now();
@@ -67,7 +72,9 @@ export default class UserController{
             console.log(error.message);
         }
 
-        return ResponseHandler.OK(request, response, {message: "Login Successful!"});
+        return response.status(200).json({
+            message: "Login Successful!",
+        });
     }
 
 }
