@@ -14,8 +14,9 @@ const NavBar = () => {
                 <div className="navbar-nav">
                     <NavLink className="nav-item nav-link active" to="/">Home <span className="sr-only">(current)</span></NavLink>
                     <NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>
+                </div>
             </div>
-            </div>
+            <NavLink className="nav-item nav-link px-0" to="/login">Login</NavLink>
         </nav>
         <section className="py-5 text-center container">
             <div className="row">

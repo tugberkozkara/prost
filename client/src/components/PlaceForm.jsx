@@ -49,7 +49,7 @@ const PlaceForm = () => {
 
 
   return (
-    <section className="text-center col-lg-4 mx-auto">
+    <section className="text-center col-lg-4 mx-auto w-50">
         <form onSubmit={submitHandle}>
             <div className="input-group mb-3">
             <input type="text" className="form-control" value={name} onChange={changeHandle} placeholder="Name" name="name" required></input>
