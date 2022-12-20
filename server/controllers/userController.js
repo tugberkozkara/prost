@@ -16,16 +16,13 @@ export default class UserController{
     
 
     static createUser = async (request, response) => {
-
         const {email, username, password} = request.body;
-
         const isUserExists = await User.exists({email: email});
         if(isUserExists){
             return response.status(400).json({
                 message: "Email already registered!",
             })
         }
-
         const hashedPassword = await bcrypt.hash(password, 10);
         const lastLoginDate = Date.now();
         const user = new User({
@@ -43,6 +40,7 @@ export default class UserController{
             })
         }
         return response.status(201).json({
+            user: user,
             message: "Created successfully!",
         });
     }
