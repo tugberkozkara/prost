@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
@@ -7,14 +7,14 @@ import InsertPlace from './pages/InsertPlace';
 import Login from './pages/Login';
 
 const App = () => {
+  const [user, setUser] = useState(null);
   return (
     <div>
-      <NavBar />
-
+      <NavBar user={ user } setUser={ setUser }/>
       <Routes>
             <Route path='/' element={<ListPlaces />}/>
             <Route path='/insert' element={<InsertPlace />}/>
-            <Route path='/login' element={<Login />}/>
+            <Route path='/login' element={<Login setUser={ setUser }/>}/>
       </Routes>
     </div>
   )

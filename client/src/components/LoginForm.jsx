@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../pages/Login';
 
-const LoginForm = () => {
+const LoginForm = ({ setUser }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
     
     const changeHandle = (event) => {
         const setState = {
@@ -16,12 +18,13 @@ const LoginForm = () => {
 
     const submitHandle = (event) => {
         event.preventDefault();
-        const user = {
+        const postData = {
             username,
             password,
         }
-        loginUser(user);
+        loginUser(postData, setUser);
         clearForm();
+        navigate("/");
     }
 
     const clearForm = () => {

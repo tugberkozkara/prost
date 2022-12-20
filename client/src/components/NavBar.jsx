@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
-    
+const NavBar = ({ user, setUser }) => {
+    useEffect(() => { 
+        if(localStorage.getItem("user") && !user){
+            setUser(JSON.parse(localStorage.getItem("user")));
+        }
+      }, [user]);
   return (
     <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,7 +20,17 @@ const NavBar = () => {
                     <NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>
                 </div>
             </div>
-            <NavLink className="nav-item nav-link px-0" to="/login">Login</NavLink>
+            {user ? (
+                <div className='row'>
+                    <span className="col text-muted my-0 pt-2">{user?.username}</span>
+                    <NavLink className="col nav-item nav-link px-0" onClick={(e) => {
+                      localStorage.removeItem("user");
+                      setUser(null);
+                      } }>Logout</NavLink>
+                </div>
+            ):(
+                <NavLink className="nav-item nav-link px-0" to="/login">Login</NavLink>
+                )}
         </nav>
         <section className="py-5 text-center container">
             <div className="row">

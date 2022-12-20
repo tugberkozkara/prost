@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { postPlace } from '../pages/InsertPlace';
 
 const PlaceForm = () => {
@@ -10,6 +11,7 @@ const PlaceForm = () => {
     const [menu, setMenu] = useState('');
     const [tags, setTags] = useState([]);
     const [fillRequired, setFillRequired] = useState(Boolean(name) && Boolean(category) && Boolean(location) && Boolean(price));
+    const navigate = useNavigate();
     
     const changeHandle = (event) => {
         const setState = {
@@ -36,6 +38,7 @@ const PlaceForm = () => {
         }
         postPlace(place);
         clearForm();
+        navigate("/");
     }
 
     const clearForm = () => {
