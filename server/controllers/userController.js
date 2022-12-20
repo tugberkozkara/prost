@@ -73,6 +73,7 @@ export default class UserController{
         }
 
         return response.status(200).json({
+            user: user,
             message: "Login Successful!",
         });
     }
