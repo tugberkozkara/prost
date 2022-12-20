@@ -1,12 +1,12 @@
 import axios from 'axios';
-import LoginForm from "../components/LoginForm";
-import { API_URL_LOGIN } from '../utils/constants';
+import RegisterForm from "../components/RegisterForm";
+import { API_URL_REGISTER } from '../utils/constants';
 
 
-export const loginUser = async (postData, setUser) => {
+export const registerUser = async (postData, setUser) => {
     try {
         await axios.post(
-            API_URL_LOGIN,
+            API_URL_REGISTER,
             postData
         ).then((response)=>{
             console.log(response);
@@ -20,10 +20,10 @@ export const loginUser = async (postData, setUser) => {
 
 
 
-export default function Login({ setUser }){
+export default function Register({ setUser }){
     return(
         <div>
-            <LoginForm setUser={ setUser }/>
+            <RegisterForm setUser={ setUser }/>
         </div>
     )
 }

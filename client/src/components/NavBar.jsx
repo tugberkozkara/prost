@@ -17,7 +17,7 @@ const NavBar = ({ user, setUser }) => {
             <div className="collapse navbar-collapse show" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
                     <NavLink className="nav-item nav-link active" to="/">Home <span className="sr-only">(current)</span></NavLink>
-                    <NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>
+                    {user ? (<NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>):(<></>)}
                 </div>
             </div>
             {user ? (

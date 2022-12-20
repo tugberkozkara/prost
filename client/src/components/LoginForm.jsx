@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { loginUser } from '../pages/Login';
 
 const LoginForm = ({ setUser }) => {
@@ -34,7 +34,7 @@ const LoginForm = ({ setUser }) => {
 
 
   return (
-    <section className="text-center col-lg-4 mx-auto w-50">
+    <section className="text-center col-lg-3 mx-auto w-50">
         <form onSubmit={submitHandle}>
             <div className="input-group mb-3">
             <input type="text" className="form-control" value={username} onChange={changeHandle} placeholder="Username" name="username" required></input>
@@ -42,10 +42,14 @@ const LoginForm = ({ setUser }) => {
             <div className="input-group mb-3">
             <input type="password" className="form-control" value={password} onChange={changeHandle} placeholder="Password" name="password" required></input>
             </div>
-            <p>
+            <p className='mb-0'>
             <button className="btn btn-primary my-2" type='submit'>Login</button>
             </p>
         </form>
+        <div className='row justify-content-center'>
+            <span className="col-8 text-muted my-0 pt-2 text-right pr-1">You don't have an account?</span>
+            <NavLink className="col nav-item nav-link text-left pl-1" to="/register">Register</NavLink>
+        </div>
     </section>
   )
 }
