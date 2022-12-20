@@ -27,7 +27,8 @@ export default class PlaceController{
             location: request.body.location,
             price: request.body.price,
             menu: request.body.menu,
-            tags: request.body.tags
+            tags: request.body.tags,
+            createdBy: request.body.createdBy
         })
         try {
             await place.save();
