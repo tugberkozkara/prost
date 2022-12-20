@@ -28,16 +28,20 @@ const PlaceForm = () => {
 
     const submitHandle = (event) => {
         event.preventDefault();
-        const place = {
-            name,
-            category,
-            location,
-            price,
-            menu,
-            tags
+        if (localStorage.getItem("user")){
+            const createdBy = JSON.parse(localStorage.getItem("user"));
+            const place = {
+                name,
+                category,
+                location,
+                price,
+                menu,
+                tags,
+                createdBy
+            }
+            postPlace(place);
+            clearForm();
         }
-        postPlace(place);
-        clearForm();
         navigate("/");
     }
 

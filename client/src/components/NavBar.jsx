@@ -9,7 +9,7 @@ const NavBar = ({ user, setUser }) => {
       }, [user]);
   return (
     <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
             <a className="navbar-brand" href="/">Prost!</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -22,11 +22,11 @@ const NavBar = ({ user, setUser }) => {
             </div>
             {user ? (
                 <div className='row'>
-                    <span className="col text-muted my-0 pt-2">{user?.username}</span>
                     <NavLink className="col nav-item nav-link px-0" onClick={(e) => {
                       localStorage.removeItem("user");
                       setUser(null);
                       } }>Logout</NavLink>
+                    <span className="col text-muted my-0 pt-2">{user?.username}</span>
                 </div>
             ):(
                 <NavLink className="nav-item nav-link px-0" to="/login">Login</NavLink>

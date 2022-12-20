@@ -10,7 +10,7 @@ const PlaceCard = ({ place }) => {
                 <img src={logo} ></img>
                 <div className="card-body">
                     <h5 className="card-title">{place.name}</h5>
-                        <p className="card-text">{place.location}</p>
+                        <p className="card-text">{place?.location}</p>
                     <Link to="#" className="btn btn-primary">{place.price}</Link>
                 </div>
             </div>

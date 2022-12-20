@@ -47,7 +47,7 @@ const LoginForm = ({ setUser }) => {
             </p>
         </form>
         <div className='row justify-content-center'>
-            <span className="col-8 text-muted my-0 pt-2 text-right pr-1">You don't have an account?</span>
+            <span className="col-6 col-sm-7 col-m-8 col-lg-7 text-muted my-0 pt-2 text-right pr-1">You don't have an account?</span>
             <NavLink className="col nav-item nav-link text-left pl-1" to="/register">Register</NavLink>
         </div>
     </section>
