@@ -9,9 +9,10 @@ const PlaceCard = ({ place }) => {
             <div className="card" id="place-card">
                 <img src={logo} ></img>
                 <div className="card-body">
-                    <h5 className="card-title">{place.name}</h5>
+                    <h5 className="card-title">{place?.name}</h5>
                         <p className="card-text">{place?.location}</p>
-                    <Link to="#" className="btn btn-primary">{place.price}</Link>
+                    <Link to="#" className="btn btn-primary">{place?.price}</Link>
+                    <p class="card-text"><small class="text-muted">Added by {place?.createdBy?.username}</small></p>
                 </div>
             </div>
         </div>

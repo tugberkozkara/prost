@@ -69,7 +69,7 @@ const RegisterForm = ({ setUser }) => {
             </div>
             <span className="col-7 text-danger my-0 pt-2 text-right pr-1">{passwordAlert}</span>
             <p className='mb-0'>
-            <button className="btn btn-primary my-2" type='submit' disabled={passwordAlert != null}>Register</button>
+            <button className="btn btn-primary my-2" type='submit' disabled={passwordAlert != null || email === "" || username === ""}>Register</button>
             </p>
         </form>
         <div className='row justify-content-center'>

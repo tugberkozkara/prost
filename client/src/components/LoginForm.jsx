@@ -43,7 +43,7 @@ const LoginForm = ({ setUser }) => {
             <input type="password" className="form-control" value={password} onChange={changeHandle} placeholder="Password" name="password" required></input>
             </div>
             <p className='mb-0'>
-            <button className="btn btn-primary my-2" type='submit'>Login</button>
+            <button className="btn btn-primary my-2" type='submit' disabled={username === "" || password === ""}>Login</button>
             </p>
         </form>
         <div className='row justify-content-center'>
