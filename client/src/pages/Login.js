@@ -9,7 +9,6 @@ export const loginUser = async (postData, setUser) => {
             API_URL_LOGIN,
             postData
         ).then((response)=>{
-            console.log(response);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             setUser(response.data.user);
         })
