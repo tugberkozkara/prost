@@ -50,14 +50,14 @@ export default class UserController{
         const {username, password} = request.body;
         const user = await User.findOne({username: username});
         if(!user){
-            return response.status(403).json({
+            return response.status(401).json({
                 message: "Username or password is incorrect!",
             });
         }
 
         const isPasswordTrue = await bcrypt.compare(password, user.password);
         if(!isPasswordTrue){
-            return response.status(403).json({
+            return response.status(401).json({
                 message: "Username or password is incorrect!",
             });
         }
