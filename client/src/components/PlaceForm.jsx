@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postPlace } from '../pages/InsertPlace';
+import { postPlace, checkTags } from '../pages/InsertPlace';
 
 const PlaceForm = () => {
 
@@ -26,22 +26,29 @@ const PlaceForm = () => {
         setFillRequired(Boolean(name) && Boolean(category) && Boolean(location) && Boolean(price));
     }
 
-    const submitHandle = (event) => {
-        event.preventDefault();
+    const postPlaceWithTags = async() => {
+        let createdBy = null;
         if (localStorage.getItem("user")){
-            const createdBy = JSON.parse(localStorage.getItem("user"));
-            const place = {
-                name,
-                category,
-                location,
-                price,
-                menu,
-                tags,
-                createdBy
-            }
-            postPlace(place);
-            clearForm();
+            createdBy = JSON.parse(localStorage.getItem("user"));
         }
+        const place = {
+            name,
+            category,
+            location,
+            price,
+            menu,
+            tags: await checkTags(tags),
+            createdBy
+        }
+        console.log(place);
+        await postPlace(place);
+    }
+
+    const submitHandle = async (event) => {
+        event.preventDefault();
+        
+        await postPlaceWithTags();
+        clearForm();
         navigate("/");
     }
 
