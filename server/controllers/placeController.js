@@ -1,10 +1,20 @@
 import Place from '../models/place.js';
+import Tag from '../models/tag.js';
 
 export default class PlaceController{
     
     static getAllPlaces = async (request, response) => {
         try {
-            const allPlaces = await Place.find().populate('createdBy', 'username');
+            const allPlaces = await Place.find().populate([
+                {
+                    path: 'createdBy',
+                    select: 'username'
+                },
+                {
+                    path: 'tags',
+                    select: 'name'
+                }
+            ]);
             response.status(200).json(allPlaces);
         } catch (error) {
             response.status(404).json({
@@ -21,7 +31,6 @@ export default class PlaceController{
             })
         }
         const place = new Place({
-            _id: request.body._id,
             name: request.body.name,
             category: request.body.category,
             location: request.body.location,
