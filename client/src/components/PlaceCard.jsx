@@ -12,7 +12,15 @@ const PlaceCard = ({ place }) => {
                     <h5 className="card-title">{place?.name}</h5>
                         <p className="card-text">{place?.location}</p>
                     <Link to="#" className="btn btn-primary">{place?.price}</Link>
-                    <p class="card-text"><small class="text-muted">Added by {place?.createdBy?.username}</small></p>
+                    <p className="card-text small">Added by <Link to={place?.createdBy?.username}>{place?.createdBy?.username}</Link></p>
+                    <div className='row'>
+                    {
+                        place.tags.map((tag, key) => (
+                            <Link to={tag.name} key={key} className="card-text col-md-auto m-0 p-0 text-muted small">#{tag.name}</Link>
+                            )
+                        )
+                    }
+                    </div>
                 </div>
             </div>
         </div>
