@@ -10,8 +10,8 @@ const PlaceCard = ({ place }) => {
                 <img src={logo} ></img>
                 <div className="card-body">
                     <h5 className="card-title">{place?.name}</h5>
-                        <p className="card-text">{place?.location}</p>
-                    <Link to="#" className="btn btn-primary">{place?.price}</Link>
+                    <p className="card-text">{place?.location}</p>
+                    <a href={place?.menu} target="_blank" className="btn btn-primary">Menu</a>
                     <p className="card-text small">Added by <Link to={place?.createdBy?.username}>{place?.createdBy?.username}</Link></p>
                     <div className='row'>
                     {
