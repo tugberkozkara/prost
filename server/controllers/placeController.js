@@ -4,7 +4,7 @@ export default class PlaceController{
     
     static getAllPlaces = async (request, response) => {
         try {
-            const allPlaces = await Place.find();
+            const allPlaces = await Place.find().populate('createdBy', 'username');
             response.status(200).json(allPlaces);
         } catch (error) {
             response.status(404).json({
