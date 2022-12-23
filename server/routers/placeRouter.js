@@ -8,7 +8,7 @@ var jsonParser = bodyParser.json();
 
 router.get('/', PlaceController.getAllPlaces);
 router.post('/', jsonParser, PlaceController.createPlace);
-router.get('/:placeId', PlaceHandler.getPlaceHandler ,PlaceController.getPlace);
+router.get('/:placeId', PlaceHandler.getPlaceHandler, PlaceController.getPlaceById);
 // router.put('/:placeId', PlaceHandler.getPlaceHandler, PlaceController.editPlace);
 // router.delete('/:placeId', PlaceHandler.getPlaceHandler, PlaceController.deletePlace);
 
