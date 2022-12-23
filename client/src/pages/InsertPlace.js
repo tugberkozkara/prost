@@ -35,7 +35,6 @@ export const postTag = async (postData) => {
 export const checkTags = async (tagsString) => {
     const tagStringArray = tagsString.split(',').map(e => e.trim());
     const allTags = await getTags();
-    console.log(allTags);
     const tagObjectArray = [];
 
     for (let index = 0; index < tagStringArray.length; index++) {
@@ -44,7 +43,6 @@ export const checkTags = async (tagsString) => {
         if(!allTags.some(e => e.name === name)){
             const tag = {name: name};
             const newTag = await axios.post(API_URL_TAGS_GET_POST, tag);
-            console.log(newTag);
             tagObjectArray.push(newTag.data.tag);
         }
         else{
@@ -52,7 +50,6 @@ export const checkTags = async (tagsString) => {
             tagObjectArray.push(tag);
         }
     }
-    console.log(tagObjectArray);
     return tagObjectArray;
 }
 
