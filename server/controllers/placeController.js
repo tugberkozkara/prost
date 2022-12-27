@@ -5,7 +5,7 @@ export default class PlaceController{
     
     static getAllPlaces = async (request, response) => {
 
-        const tagParams = request.query.tags;
+        const tagParams = request.query.tag;
         const userParam = request.query.user;
 
         try {
