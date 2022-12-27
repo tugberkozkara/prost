@@ -15,8 +15,8 @@ const App = () => {
       <Routes>
             <Route path='/' element={<ListPlaces />}/>
             <Route path='/insert' element={<RequireAuth user={ user }><InsertPlace /></RequireAuth>}/>
-            <Route path='/login' element={<Login setUser={ setUser }/>}/>
-            <Route path='/register' element={<Register setUser={ setUser }/>}/>
+            <Route path='/login' element={<RequireUnAuth user={ user }><Login setUser={ setUser }/></RequireUnAuth>}/>
+            <Route path='/register' element={<RequireUnAuth user={ user }><Register setUser={ setUser }/></RequireUnAuth>}/>
       </Routes>
     </div>
   )
@@ -27,6 +27,13 @@ const RequireAuth = ({ children, user }) => {
     return <Navigate to="/login" />;
   }
   return children;
+}
+
+const RequireUnAuth = ({children, user}) => {
+  if (user) {
+    return <Navigate to="/" />
+  }
+  return children
 }
 
 export default App
