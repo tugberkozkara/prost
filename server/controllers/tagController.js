@@ -34,4 +34,25 @@ export default class TagController{
             message: "Created successfully!",
         });
     }
+
+    static checkTags = async (tagsString) => {
+        const tagStringArray = tagsString.split(',').map(e => e.trim());
+        const allTags = await Tag.find();
+        const tagObjectArray = [];
+    
+        for (let index = 0; index < tagStringArray.length; index++) {
+            const name = tagStringArray[index];
+    
+            if(!allTags.some(e => e.name === name)){
+                const tag = new Tag({ name: name })
+                const newTag = await tag.save();
+                tagObjectArray.push(newTag.data.tag);
+            }
+            else{
+                const tag = allTags.find(e => e.name === name);
+                tagObjectArray.push(tag);
+            }
+        }
+        return tagObjectArray;
+    }
 }

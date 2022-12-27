@@ -1,4 +1,5 @@
 import Place from '../models/place.js';
+import TagController from './tagController.js';
 
 export default class PlaceController{
     
@@ -44,13 +45,14 @@ export default class PlaceController{
                 message: "Place already exists!",
             })
         }
+
         const place = new Place({
             name: request.body.name,
             category: request.body.category,
             location: request.body.location,
             price: request.body.price,
             menu: request.body.menu,
-            tags: request.body.tags,
+            tags: await TagController.checkTags(request.body.tags),
             createdBy: request.body.createdBy
         })
         try {
