@@ -2,8 +2,6 @@ import axios from 'axios';
 import PlaceForm from "../components/PlaceForm";
 import { API_URL_PLACES_GET_POST, API_URL_TAGS_GET_POST } from '../utils/constants';
 
-
-
 export const postPlace = async (postData) => {
     if(postData.tags?.length === 0){
         postData.tags = [];

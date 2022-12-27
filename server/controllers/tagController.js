@@ -21,7 +21,6 @@ export default class TagController{
                 message: "Tag already exists!",
             })
         }
-
         const tag = new Tag({ name: name })
         try {
             await tag.save();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import ListPlaces from './pages/ListPlaces';
@@ -14,12 +14,19 @@ const App = () => {
       <NavBar user={ user } setUser={ setUser }/>
       <Routes>
             <Route path='/' element={<ListPlaces />}/>
-            <Route path='/insert' element={<InsertPlace />}/>
+            <Route path='/insert' element={<RequireAuth user={ user }><InsertPlace /></RequireAuth>}/>
             <Route path='/login' element={<Login setUser={ setUser }/>}/>
             <Route path='/register' element={<Register setUser={ setUser }/>}/>
       </Routes>
     </div>
   )
+}
+
+const RequireAuth = ({ children, user }) => {
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+  return children;
 }
 
 export default App
