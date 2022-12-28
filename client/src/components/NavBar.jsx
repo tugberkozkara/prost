@@ -5,16 +5,14 @@ import { Buffer } from 'buffer';
 
 const NavBar = ({ token, setToken }) => {
     const [username, setUsername] = useState("");
-    const parseJwt = (token) => {
-        return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
-    }
+
     useEffect(() => { 
         if(localStorage.getItem("token") && !token){
             setToken(JSON.parse(localStorage.getItem("token")));
-            const parsedJWTPayload = parseJwt(localStorage.getItem("token"));
+            const parsedJWTPayload = JSON.parse(Buffer.from(localStorage.getItem("token").split('.')[1], 'base64').toString());
             setUsername(parsedJWTPayload.username);
         }
-      }, [setToken]);
+      }, [setToken, token]);
   return (
     <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">

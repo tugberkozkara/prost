@@ -9,7 +9,7 @@ export const loginUser = async (postData, setToken) => {
             API_URL_LOGIN,
             postData
         ).then((response)=>{
-            localStorage.setItem('token', JSON.stringify(response.data.token));
+            localStorage.setItem('token', response.data.token);
             setToken(response.data.token);
         })
     } catch (error) {

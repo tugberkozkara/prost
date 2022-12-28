@@ -26,10 +26,10 @@ const PlaceForm = () => {
         setFillRequired(Boolean(name) && Boolean(category) && Boolean(location) && Boolean(price));
     }
 
-    const postPlaceWithUser = async() => {
-        let createdBy = null;
-        if (localStorage.getItem("user")){
-            createdBy = JSON.parse(localStorage.getItem("user"));
+    const postPlaceWithToken = async() => {
+        let token = null;
+        if (localStorage.getItem("token")){
+            token = localStorage.getItem("token");
         }
         const place = {
             name,
@@ -37,17 +37,16 @@ const PlaceForm = () => {
             location,
             price,
             menu,
-            tags,
-            createdBy
+            tags
         }
         console.log(place);
-        await postPlace(place);
+        await postPlace(place, token);
     }
 
     const submitHandle = async (event) => {
         event.preventDefault();
         
-        await postPlaceWithUser();
+        await postPlaceWithToken();
         clearForm();
         navigate("/");
     }
