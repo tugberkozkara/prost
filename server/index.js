@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import userRouter from './routers/userRouter.js';
+import authRouter from './routers/authRouter.js';
 import placeRouter from './routers/placeRouter.js';
 import tagRouter from './routers/tagRouter.js';
 import './config/db.js';
@@ -22,7 +22,7 @@ app.get("/", (request, response) => {
     });
 });
 
-app.use('/users', userRouter);
+app.use('/users', authRouter);
 app.use('/places', placeRouter);
 app.use('/tags', tagRouter);
 

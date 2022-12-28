@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import User from '../models/user.js';
 
-export default class UserController{
+export default class AuthController{
 
     static getAllUsers = async (request, response) => {
         try {
