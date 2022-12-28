@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 export default class AuthController{
@@ -39,9 +40,19 @@ export default class AuthController{
                 message: error.message,
             })
         }
+
+        const token = jwt.sign({
+            username: user.username,
+            password: user.hashedPassword
+        },
+        'secret_key',
+        {
+            expiresIn :"2h"
+        })
+
         return response.status(201).json({
-            user: user,
             message: "Created successfully!",
+            token: token
         });
     }
 
@@ -70,9 +81,18 @@ export default class AuthController{
             console.log(error.message);
         }
 
+        const token = jwt.sign({
+            username: user.username,
+            password: user.password
+        },
+        'secret_key',
+        {
+            expiresIn :"2h"
+        })
+
         return response.status(200).json({
-            user: user,
             message: "Login Successful!",
+            token: token
         });
     }
 
