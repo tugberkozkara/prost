@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Buffer } from 'buffer';
 
-const NavBar = ({ user, setUser }) => {
+const NavBar = ({ token, setToken }) => {
+    const [username, setUsername] = useState("");
+    const parseJwt = (token) => {
+        return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    }
     useEffect(() => { 
-        if(localStorage.getItem("user") && !user){
-            setUser(JSON.parse(localStorage.getItem("user")));
+        if(localStorage.getItem("token") && !token){
+            setToken(JSON.parse(localStorage.getItem("token")));
+            const parsedJWTPayload = parseJwt(localStorage.getItem("token"));
+            setUsername(parsedJWTPayload.username);
         }
-      }, [user]);
+      }, [setToken]);
   return (
     <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
@@ -17,16 +25,16 @@ const NavBar = ({ user, setUser }) => {
             <div className="collapse navbar-collapse show" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
                     <NavLink className="nav-item nav-link active" to="/">Home <span className="sr-only">(current)</span></NavLink>
-                    {user ? (<NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>):(<></>)}
+                    {token ? (<NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>):(<></>)}
                 </div>
             </div>
-            {user ? (
+            {token ? (
                 <div className='row'>
                     <NavLink className="col nav-item nav-link px-0" onClick={(e) => {
-                      localStorage.removeItem("user");
-                      setUser(null);
+                      localStorage.removeItem("token");
+                      setToken(null);
                       } }>Logout</NavLink>
-                    <span className="col text-muted my-0 pt-2">{user?.username}</span>
+                    <span className="col text-muted my-0 pt-2">{username}</span>
                 </div>
             ):(
                 <NavLink className="nav-item nav-link px-0" to="/login">Login</NavLink>

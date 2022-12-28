@@ -3,14 +3,14 @@ import LoginForm from "../components/LoginForm";
 import { API_URL_LOGIN } from '../utils/constants';
 
 
-export const loginUser = async (postData, setUser) => {
+export const loginUser = async (postData, setToken) => {
     try {
         await axios.post(
             API_URL_LOGIN,
             postData
         ).then((response)=>{
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            setUser(response.data.user);
+            localStorage.setItem('token', JSON.stringify(response.data.token));
+            setToken(response.data.token);
         })
     } catch (error) {
         console.log(error);
@@ -19,10 +19,10 @@ export const loginUser = async (postData, setUser) => {
 
 
 
-export default function Login({ setUser }){
+export default function Login({ setToken }){
     return(
         <div>
-            <LoginForm setUser={ setUser }/>
+            <LoginForm setToken={ setToken }/>
         </div>
     )
 }

@@ -3,14 +3,14 @@ import RegisterForm from "../components/RegisterForm";
 import { API_URL_REGISTER } from '../utils/constants';
 
 
-export const registerUser = async (postData, setUser) => {
+export const registerUser = async (postData, setToken) => {
     try {
         await axios.post(
             API_URL_REGISTER,
             postData
         ).then((response)=>{
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            setUser(response.data.user);
+            localStorage.setItem('token', JSON.stringify(response.data.token));
+            setToken(response.data.token);
         })
     } catch (error) {
         console.log(error);
@@ -19,10 +19,10 @@ export const registerUser = async (postData, setUser) => {
 
 
 
-export default function Register({ setUser }){
+export default function Register({ setToken }){
     return(
         <div>
-            <RegisterForm setUser={ setUser }/>
+            <RegisterForm setToken={ setToken }/>
         </div>
     )
 }

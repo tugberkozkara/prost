@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { registerUser } from '../pages/Register';
 
-const RegisterForm = ({ setUser }) => {
+const RegisterForm = ({ setToken }) => {
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -30,7 +30,7 @@ const RegisterForm = ({ setUser }) => {
                 username,
                 password,
             }
-            registerUser(postData, setUser);
+            registerUser(postData, setToken);
             clearForm();
             navigate("/");
         }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { loginUser } from '../pages/Login';
 
-const LoginForm = ({ setUser }) => {
+const LoginForm = ({ setToken }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +22,7 @@ const LoginForm = ({ setUser }) => {
             username,
             password,
         }
-        loginUser(postData, setUser);
+        loginUser(postData, setToken);
         clearForm();
         navigate("/");
     }
