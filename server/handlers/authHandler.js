@@ -9,6 +9,7 @@ export default class AuthHandler{
         */
         try {
             const token = request.headers.authorization.split(" ")[1];
+            console.log(token);
             const decodedToken = jwt.verify(token, 'secret_key');
             request.userData = decodedToken;
             next();

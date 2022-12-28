@@ -1,5 +1,6 @@
 import Place from '../models/place.js';
 import TagController from './tagController.js';
+import AuthController from './authController.js';
 
 export default class PlaceController{
     
@@ -46,6 +47,9 @@ export default class PlaceController{
             })
         }
 
+        const userData = request.userData;
+
+
         const place = new Place({
             name: request.body.name,
             category: request.body.category,
@@ -53,12 +57,11 @@ export default class PlaceController{
             price: request.body.price,
             menu: request.body.menu,
             tags: await TagController.checkTags(request.body.tags),
-            createdBy: request.body.createdBy
+            createdBy: await AuthController.getUserByUsername(userData.username)
         })
         try {
             await place.save();
         } catch (error) {
-            console.log(error)
             return response.status(400).json({
                 message: error.message,
             })

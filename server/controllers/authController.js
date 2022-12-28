@@ -14,6 +14,15 @@ export default class AuthController{
             })
         }
     }
+
+    static getUserByUsername = async (username) => {
+        try {
+            const user = await User.findOne({username: username});
+            return user;
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
 
     static createUser = async (request, response) => {
