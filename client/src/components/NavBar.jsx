@@ -5,12 +5,24 @@ import { Buffer } from 'buffer';
 
 const NavBar = ({ token, setToken }) => {
     const [username, setUsername] = useState("");
+    const [isTokenExpired, setIsTokenExpired] = useState(false);
+
+    const expireToken = () => {
+        localStorage.removeItem("token");
+        setToken(null);
+    }
 
     useEffect(() => { 
         if(localStorage.getItem("token") && !token){
-            setToken(JSON.parse(localStorage.getItem("token")));
+            setToken(localStorage.getItem("token"));
             const parsedJWTPayload = JSON.parse(Buffer.from(localStorage.getItem("token").split('.')[1], 'base64').toString());
-            setUsername(parsedJWTPayload.username);
+            setIsTokenExpired(parsedJWTPayload.exp > Date.now());
+            if (!isTokenExpired){
+                setUsername(parsedJWTPayload.username);
+            }else {
+                expireToken();
+            }
+            
         }
       }, [setToken, token]);
   return (
@@ -26,11 +38,9 @@ const NavBar = ({ token, setToken }) => {
                     {token ? (<NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>):(<></>)}
                 </div>
             </div>
-            {token ? (
+            {token && !isTokenExpired ? (
                 <div className='row'>
-                    <NavLink className="col nav-item nav-link px-0" onClick={(e) => {
-                      localStorage.removeItem("token");
-                      setToken(null);
+                    <NavLink className="col nav-item nav-link px-0" onClick={(e) => { expireToken()
                       } }>Logout</NavLink>
                     <span className="col text-muted my-0 pt-2">{username}</span>
                 </div>
