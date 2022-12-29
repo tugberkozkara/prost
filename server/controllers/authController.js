@@ -1,6 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import User from '../models/user.js';
+
+dotenv.config();
 
 export default class AuthController{
 
@@ -54,7 +57,7 @@ export default class AuthController{
             username: user.username,
             password: user.hashedPassword
         },
-        'secret_key',
+        process.env.SECRET_KEY,
         {
             expiresIn :"2h"
         })
@@ -94,7 +97,7 @@ export default class AuthController{
             username: user.username,
             password: user.password
         },
-        'secret_key',
+        process.env.SECRET_KEY,
         {
             expiresIn :"2h"
         })
