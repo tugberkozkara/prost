@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const tagSchema = new mongoose.Schema({
      name: {
@@ -6,8 +6,8 @@ const tagSchema = new mongoose.Schema({
           unique: true,
           required: true
      }
-})
+});
 
 
-const Tag = mongoose.model('Tag', tagSchema);
+const Tag = mongoose.model("Tag", tagSchema);
 export default Tag;

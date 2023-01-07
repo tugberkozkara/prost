@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 export default class AuthHandler{
 
@@ -11,8 +11,8 @@ export default class AuthHandler{
             next();
         }catch(error) {
             return response.status(401).send({
-                message: 'Auth failed'
+                message: "Auth failed"
             });
         }
-    }
+    };
 }

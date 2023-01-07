@@ -1,6 +1,6 @@
-import Place from '../models/place.js';
-import TagController from './tagController.js';
-import AuthController from './authController.js';
+import Place from "../models/place.js";
+import TagController from "./tagController.js";
+import AuthController from "./authController.js";
 
 export default class PlaceController{
     
@@ -12,17 +12,17 @@ export default class PlaceController{
         try {
             let allPlaces = await Place.find().populate([
                 {
-                    path: 'createdBy',
-                    select: 'username'
+                    path: "createdBy",
+                    select: "username"
                 },
                 {
-                    path: 'tags',
-                    select: 'name'
+                    path: "tags",
+                    select: "name"
                 }
             ]);
 
             if(tagParams !== undefined){
-                const tagQueryArray = tagParams.split(',').map(e => e.trim());
+                const tagQueryArray = tagParams.split(",").map(e => e.trim());
                 let checker = (arr, target) => target.every(element => arr.includes(element));
                 allPlaces = allPlaces.filter(place => checker(place.tags.map(tag => tag.name), tagQueryArray));
             }
@@ -35,16 +35,16 @@ export default class PlaceController{
         } catch (error) {
             response.status(404).json({
                 message: error.message,
-            })
+            });
         }
-    }
+    };
 
     static createPlace = async (request, response) => {
         const isPlaceExists = await Place.exists({name:request.body.name});
         if(isPlaceExists){
             return response.status(400).json({
                 message: "Place already exists!",
-            })
+            });
         }
 
         const userData = request.userData;
@@ -58,18 +58,18 @@ export default class PlaceController{
             menu: request.body.menu,
             tags: await TagController.checkTags(request.body.tags),
             createdBy: await AuthController.getUserByUsername(userData.username)
-        })
+        });
         try {
             await place.save();
         } catch (error) {
             return response.status(400).json({
                 message: error.message,
-            })
+            });
         }
         return response.status(201).json({
             message: "Created successfully!",
         });
-    }
+    };
 
 
     static getPlaceById = async (request, response) => {
@@ -82,5 +82,5 @@ export default class PlaceController{
             });
         }
         return response.status(200).json(place);
-    }
+    };
 }

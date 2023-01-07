@@ -1,7 +1,7 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import User from '../models/user.js';
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import User from "../models/user.js";
 
 dotenv.config();
 
@@ -14,9 +14,9 @@ export default class AuthController{
         } catch (error) {
             response.status(404).json({
                 message: error.message,
-            })
+            });
         }
-    }
+    };
 
     static getUserByUsername = async (username) => {
         try {
@@ -25,7 +25,7 @@ export default class AuthController{
         } catch (error) {
             console.log(error);
         }
-    }
+    };
     
 
     static createUser = async (request, response) => {
@@ -34,7 +34,7 @@ export default class AuthController{
         if(isUserExists){
             return response.status(400).json({
                 message: "Email already registered!",
-            })
+            });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const lastLoginDate = Date.now();
@@ -43,14 +43,14 @@ export default class AuthController{
             username: username,
             password: hashedPassword,
             lastLoginDate: lastLoginDate
-        })
+        });
 
         try {
             await user.save();
         } catch (error) {
             return response.status(400).json({
                 message: error.message,
-            })
+            });
         }
 
         const token = jwt.sign({
@@ -60,13 +60,13 @@ export default class AuthController{
         process.env.SECRET_KEY,
         {
             expiresIn :"2h"
-        })
+        });
 
         return response.status(201).json({
             message: "Created successfully!",
             token: token
         });
-    }
+    };
 
 
     static loginUser = async (request, response) => {
@@ -100,12 +100,12 @@ export default class AuthController{
         process.env.SECRET_KEY,
         {
             expiresIn :"2h"
-        })
+        });
 
         return response.status(200).json({
             message: "Login Successful!",
             token: token
         });
-    }
+    };
 
 }

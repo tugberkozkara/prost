@@ -1,4 +1,4 @@
-import { isValidObjectId } from 'mongoose';
+import { isValidObjectId } from "mongoose";
 
 export default class PlaceHandler{
     
@@ -9,5 +9,5 @@ export default class PlaceHandler{
             });
         }
         next();
-    }
+    };
 }

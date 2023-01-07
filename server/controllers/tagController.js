@@ -1,4 +1,4 @@
-import Tag from '../models/tag.js';
+import Tag from "../models/tag.js";
 
 export default class TagController{
 
@@ -9,9 +9,9 @@ export default class TagController{
         } catch (error) {
             response.status(404).json({
                 message: error.message,
-            })
+            });
         }
-    }
+    };
 
     static createTag = async (request, response) => {
         const { name } = request.body;
@@ -19,24 +19,24 @@ export default class TagController{
         if(isTagExists){
             return response.status(400).json({
                 message: "Tag already exists!",
-            })
+            });
         }
-        const tag = new Tag({ name: name })
+        const tag = new Tag({ name: name });
         try {
             await tag.save();
         } catch (error) {
             return response.status(400).json({
                 message: error.message,
-            })
+            });
         }
         return response.status(201).json({
             tag: tag,
             message: "Created successfully!",
         });
-    }
+    };
 
     static checkTags = async (tagsString) => {
-        const tagStringArray = tagsString.split(',').map(e => e.trim());
+        const tagStringArray = tagsString.split(",").map(e => e.trim());
         const allTags = await Tag.find();
         const tagObjectArray = [];
     
@@ -44,7 +44,7 @@ export default class TagController{
             const name = tagStringArray[index];
     
             if(!allTags.some(e => e.name === name)){
-                const tag = new Tag({ name: name })
+                const tag = new Tag({ name: name });
                 const newTag = await tag.save();
                 tagObjectArray.push(newTag.data.tag);
             }
@@ -54,5 +54,5 @@ export default class TagController{
             }
         }
         return tagObjectArray;
-    }
+    };
 }

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const placeSchema = new mongoose.Schema({
      name: { 
@@ -28,16 +28,16 @@ const placeSchema = new mongoose.Schema({
      },
      tags : [{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'Tag',
+        ref:"Tag",
         required: false
      }],
      createdBy: {
           type: mongoose.Schema.Types.ObjectId,
-          ref:'User',
+          ref:"User",
     }
 },{
     timestamps: true
-})
+});
 
-const Place = mongoose.model('Place', placeSchema);
+const Place = mongoose.model("Place", placeSchema);
 export default Place;
