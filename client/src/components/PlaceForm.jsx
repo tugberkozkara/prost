@@ -39,7 +39,6 @@ const PlaceForm = () => {
             menu,
             tags
         }
-        console.log(place);
         await postPlace(place, token);
     }
 

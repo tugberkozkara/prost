@@ -5,7 +5,6 @@ export default class AuthHandler{
     static checkAuth = (request, response, next) => {
         try {
             const token = request.headers.authorization.split(" ")[1];
-            console.log(token);
             const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
             request.userData = decodedToken;
             next();
