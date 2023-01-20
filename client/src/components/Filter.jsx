@@ -3,10 +3,9 @@ import { API_URL_TAGS_GET_POST } from '../utils/constants';
 import axios from 'axios';
 
 
-const Filter = ({places, setFiltered}) => {
+const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
     const [tags, setTags] = useState([]);
-    const selectedTags = [];
-    const [activeTags, setActiveTags] = useState(selectedTags);
+    
     
     const getTags = async () => {
         try {
@@ -47,7 +46,7 @@ const Filter = ({places, setFiltered}) => {
         {
             tags.map((tag, i) =>
                 <div key={i} >
-                    <button value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1">{tag.name}</button>
+                    <button value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1" name="tag">{tag.name}</button>
                 </div>)
         }
     </div>
