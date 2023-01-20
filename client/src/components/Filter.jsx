@@ -26,7 +26,9 @@ const Filter = ({places, setFiltered}) => {
             setFiltered(places);
             return;
         }
-        const filtered = places.filter((place) => place.tags.some(tag => activeTags.includes(tag._id)));
+        // const filtered = places.filter((place) => place.tags.some(tag => activeTags.includes(tag._id)));
+        let checker = (arr, target) => target.every(element => arr.includes(element));
+        const filtered = places.filter(place => checker(place.tags.map(tag => tag._id), activeTags));
         setFiltered(filtered);
     }, [activeTags]);
 
