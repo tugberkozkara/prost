@@ -28,7 +28,7 @@ export default function ListPlaces(){
     const clearFilters = (e) => {
         setActiveTags([]);
         const tagButtons = document.getElementsByName('tag');
-        tagButtons.forEach((tag) => (tag.className = "btn btn-outline-secondary mx-1"));
+        tagButtons.forEach((tag) => (tag.className = "btn btn-outline-secondary mx-1 mt-2"));
     }
 
     return(

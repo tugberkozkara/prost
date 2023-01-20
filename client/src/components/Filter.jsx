@@ -33,21 +33,24 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
     const tagHandle = (event) => {
         if(activeTags.includes(event.target.value)){
             setActiveTags(activeTags.filter(id => id !== event.target.value));
-            event.target.className = "btn btn-outline-secondary mx-1";
+            event.target.className = "btn btn-outline-secondary mx-1 mt-2";
         }
         else{
             setActiveTags((prevTags) => [...prevTags, event.target.value]);
-            event.target.className = "btn btn-secondary mx-1";
+            event.target.className = "btn btn-secondary mx-1 mt-2";
         }
     }
 
   return (
-    <div className="btn-group d-flex justify-content-center mb-2" role="group" aria-label="Basic example">
+    <div className="btn-group d-flex row col-lg-6 mx-auto mb-3 justify-content-center" role="group" aria-label="Basic example">
         {
-            tags.map((tag, i) =>
-                <div key={i} >
-                    <button value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1" name="tag">{tag.name}</button>
-                </div>)
+            tags.map((tag, i) => {
+                if(i<10)
+                return  (<div key={i} >
+                            <button value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1 mt-2" name="tag">{tag.name}</button>
+                        </div>);
+                return;
+            })
         }
     </div>
   )
