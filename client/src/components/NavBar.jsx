@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Buffer } from 'buffer';
+import Auth from '../utils/auth';
 
 const NavBar = ({ token, setToken }) => {
     const [username, setUsername] = useState("");
@@ -15,14 +14,14 @@ const NavBar = ({ token, setToken }) => {
     useEffect(() => { 
         if(localStorage.getItem("token") && !token){
             setToken(localStorage.getItem("token"));
-            const parsedJWTPayload = JSON.parse(Buffer.from(localStorage.getItem("token").split('.')[1], 'base64').toString());
+            const parsedJWTPayload = Auth.parseJWT(localStorage.getItem("token"));
+
             setIsTokenExpired(parsedJWTPayload.exp > Date.now());
             if (!isTokenExpired){
                 setUsername(parsedJWTPayload.username);
             }else {
                 expireToken();
             }
-            
         }
       }, [setToken, token]);
   return (

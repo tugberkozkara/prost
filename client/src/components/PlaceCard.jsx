@@ -1,13 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../components/apple-touch-icon.png';
+import Auth from '../utils/auth';
 
 const PlaceCard = ({ place }) => {
+    
+    let parsedJWTPayload = null;
+    
+    if(localStorage.getItem("token") !== null){
+        parsedJWTPayload = Auth.parseJWT(localStorage.getItem("token"));
+    }
 
   return (
         <div className="col mb-4">
             <div className="card" id="place-card">
-                <img src={logo} ></img>
+            <div className="d-flex justify-content-end">
+                {place?.createdBy?.username === parsedJWTPayload?.username ? <button className="btn btn-outline-danger position-absolute">Delete</button>:<></>}
+                <img src={logo} className="rounded mx-auto d-block card-img-top"></img>
+            </div>
                 <div className="card-body">
                     <h5 className="card-title">{place?.name}</h5>
                     <p className="card-text">{place?.location}</p>
