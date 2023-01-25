@@ -1,6 +1,7 @@
 import Place from "../models/place.js";
 import TagController from "./tagController.js";
 import AuthController from "./authController.js";
+import Tag from "../models/tag.js";
 
 export default class PlaceController{
     
@@ -85,7 +86,14 @@ export default class PlaceController{
 
     static deletePlaceById = async (request, response) => {
         const { id } = request.params;
+        let places = await Place.find({_id: {$ne : id }}).populate("tags");
 
+        const tagsOfPlace = await TagController.getTagsOfPlaceByPlaceId(id);
+        tagsOfPlace.forEach(async tag => {
+            if(!TagController.isTagHasAnotherPlaces(tag._id, places)){
+                await Tag.findByIdAndDelete(tag._id);
+            }
+        });
         try {
             await Place.findByIdAndDelete(id);
         } catch (error) {

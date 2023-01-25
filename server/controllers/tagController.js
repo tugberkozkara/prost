@@ -1,4 +1,5 @@
 import Tag from "../models/tag.js";
+import Place from "../models/place.js";
 
 export default class TagController{
 
@@ -46,7 +47,7 @@ export default class TagController{
             if(!allTags.some(e => e.name === name)){
                 const tag = new Tag({ name: name });
                 const newTag = await tag.save();
-                tagObjectArray.push(newTag.data.tag);
+                tagObjectArray.push(newTag);
             }
             else{
                 const tag = allTags.find(e => e.name === name);
@@ -68,5 +69,14 @@ export default class TagController{
         return response.status(200).json({
             message: "Deleted successfully!",
         });
+    }
+
+    static getTagsOfPlaceByPlaceId = async (id) => {
+        const place = await Place.findById(id).populate("tags");
+        return place.tags;
+    }
+
+    static isTagHasAnotherPlaces = (id, places) => {
+        return places.some(place => place.tags.some(tag => String(tag._id) === String(id)));
     }
 }
