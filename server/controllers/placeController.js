@@ -83,4 +83,27 @@ export default class PlaceController{
         }
         return response.status(200).json(place);
     };
+
+    static deletePlaceById = async (request, response) => {
+        const { placeId } = request.params;
+        const place = await Place.findOne({_id: placeId});
+        
+        if(!place){
+            return response.status(404).json({
+                message: "Not found!",
+            });
+        }
+        
+        try {
+            await place.remove();
+        } catch (error) {
+            return response.status(400).json({
+                message: error.message,
+            });
+        }
+        return response.status(200).json({
+                message: "Deleted successfully!",
+            });
+    };
+
 }

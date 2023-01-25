@@ -11,6 +11,6 @@ router.get("/", PlaceController.getAllPlaces);
 router.post("/", jsonParser, AuthHandler.checkAuth, PlaceController.createPlace);
 router.get("/:placeId", PlaceHandler.getPlaceHandler, PlaceController.getPlaceById);
 // router.put('/:placeId', PlaceHandler.getPlaceHandler, PlaceController.editPlace);
-// router.delete('/:placeId', PlaceHandler.getPlaceHandler, PlaceController.deletePlace);
+router.delete("/:placeId", AuthHandler.checkAuth, PlaceHandler.getPlaceHandler, PlaceController.deletePlaceById);
 
 export default router;
