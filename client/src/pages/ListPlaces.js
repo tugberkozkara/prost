@@ -25,7 +25,7 @@ export default function ListPlaces(){
         getPlaces();
       }, []);
     
-    const clearFilters = (e) => {
+    const clearFilters = () => {
         setActiveTags([]);
         const tagButtons = document.getElementsByName('tag');
         tagButtons.forEach((tag) => (tag.className = "btn btn-outline-secondary mx-1 mt-2"));
@@ -38,7 +38,7 @@ export default function ListPlaces(){
                 {filtered.length !== 0 ? (
                     filtered.map((place, i) => 
                         <div key={i} >
-                            <PlaceCard place={place} />
+                            <PlaceCard place={place} filtered={filtered} setFiltered={setFiltered}/>
                         </div>)
                 ):
                 (

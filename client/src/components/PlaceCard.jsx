@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import logo from '../components/apple-touch-icon.png';
 import Auth from '../utils/auth';
+import { deletePlace } from '../pages/DeletePlace';
+import { Link } from 'react-router-dom';
 
-const PlaceCard = ({ place }) => {
+const PlaceCard = ({ place, filtered, setFiltered }) => {
     
     let parsedJWTPayload = null;
     
@@ -11,11 +12,27 @@ const PlaceCard = ({ place }) => {
         parsedJWTPayload = Auth.parseJWT(localStorage.getItem("token"));
     }
 
+    const deletePlaceWithToken = async(placeId) => {
+        let token = null;
+        if (localStorage.getItem("token")){
+            token = localStorage.getItem("token");
+        }
+        await deletePlace(placeId, token);
+    }
+
+    const deleteHandle = async (event) => {
+        event.preventDefault();
+        const placeId = event.target.id;
+        await deletePlaceWithToken(placeId);
+        setFiltered(filtered.filter((place) => place._id !== placeId));
+    }
+
+
   return (
         <div className="col mb-4">
             <div className="card" id="place-card">
             <div className="d-flex justify-content-end">
-                {place?.createdBy?.username === parsedJWTPayload?.username ? <button className="btn btn-outline-danger position-absolute">Delete</button>:<></>}
+                {place?.createdBy?.username === parsedJWTPayload?.username ? <button className="btn btn-outline-danger position-absolute" onClick={deleteHandle} id={place?._id}>Delete</button>:<></>}
                 <img src={logo} className="rounded mx-auto d-block card-img-top"></img>
             </div>
                 <div className="card-body">
