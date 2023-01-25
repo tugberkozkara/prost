@@ -35,7 +35,7 @@ export default class TagController{
         });
     };
 
-    static checkTags = async (tagsString) => {
+    static getTagsByArray = async (tagsString) => {
         const tagStringArray = tagsString.split(",").map(e => e.trim());
         const allTags = await Tag.find();
         const tagObjectArray = [];
@@ -55,4 +55,18 @@ export default class TagController{
         }
         return tagObjectArray;
     };
+
+    static deleteTagById = async (request, response) => {
+        const { id } = request.params;
+        try {
+            await Tag.findByIdAndDelete(id);
+        } catch (error) {
+            return response.status(400).json({
+                message: error.message,
+            });
+        }
+        return response.status(200).json({
+            message: "Deleted successfully!",
+        });
+    }
 }
