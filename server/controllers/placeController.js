@@ -49,14 +49,13 @@ export default class PlaceController{
 
         const userData = request.userData;
 
-
         const place = new Place({
             name: request.body.name,
             category: request.body.category,
             location: request.body.location,
             price: request.body.price,
             menu: request.body.menu,
-            tags: await TagController.checkTags(request.body.tags),
+            tags: await TagController.getTagsByArray(request.body.tags),
             createdBy: await AuthController.getUserByUsername(userData.username)
         });
         try {
@@ -73,8 +72,8 @@ export default class PlaceController{
 
 
     static getPlaceById = async (request, response) => {
-        const { placeId } = request.params;
-        const place = await Place.findOne({_id: placeId});
+        const { id } = request.params;
+        const place = await Place.findOne({_id: id});
         
         if(!place){
             return response.status(404).json({
@@ -85,17 +84,10 @@ export default class PlaceController{
     };
 
     static deletePlaceById = async (request, response) => {
-        const { placeId } = request.params;
-        const place = await Place.findOne({_id: placeId});
-        
-        if(!place){
-            return response.status(404).json({
-                message: "Not found!",
-            });
-        }
-        
+        const { id } = request.params;
+
         try {
-            await place.remove();
+            await Place.findByIdAndDelete(id);
         } catch (error) {
             return response.status(400).json({
                 message: error.message,
