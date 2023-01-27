@@ -1,6 +1,8 @@
 # Prost!
 
-![prost-homepage](./README-media/header.png)
+<p align="center">
+  <img src="./README-media/header.png" />
+</p>
 
 ## [prost-to.netlify.app](https://prost-to.netlify.app/)
 </br>
