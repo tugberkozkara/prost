@@ -32,9 +32,14 @@ export default class PlaceController{
                 allPlaces = allPlaces.filter(place => place.createdBy.username == userParam);
             }
             
-            response.status(200).json(allPlaces);
+            if(allPlaces.length === 0){
+                return response.status(404).json({
+                    message: "Not found!",
+                });
+            }
+            return response.status(200).json(allPlaces);
         } catch (error) {
-            response.status(404).json({
+            return response.status(404).json({
                 message: error.message,
             });
         }

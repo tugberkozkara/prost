@@ -3,6 +3,7 @@ import PlaceCard from '../components/PlaceCard';
 import Filter from '../components/Filter';
 import { API_URL_PLACES } from '../utils/constants';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 export default function ListPlaces(){
 
@@ -10,10 +11,17 @@ export default function ListPlaces(){
     const [filtered, setFiltered] = useState([]);
     const selectedTags = [];
     const [activeTags, setActiveTags] = useState(selectedTags);
+    
+    const params = useParams(null);
 
     const getPlaces = async () => {
+        let queryParams = {}
+        if(params.username){
+            queryParams = {user: params.username}
+        }
+
         try {
-            const allPlaces = await axios.get(API_URL_PLACES);
+            const allPlaces = await axios.get(API_URL_PLACES, {params: queryParams});
             setPlaces(allPlaces.data);
             setFiltered(allPlaces.data);
         } catch (error) {
@@ -33,12 +41,19 @@ export default function ListPlaces(){
 
     return(
         <>
+        {params?.username ? (
+            <blockquote className="blockquote text-center">
+                <p className="mb-0">places by {params?.username}</p>
+            </blockquote>
+        ):(
+        <></>)}
+        
         <Filter places={places} setFiltered={setFiltered} activeTags={activeTags} setActiveTags={setActiveTags}/>
             <div className='row col-lg-8 mx-auto justify-content-center'>
                 {filtered.length !== 0 ? (
                     filtered.map((place, i) => 
                         <div key={i} >
-                            <PlaceCard place={place} filtered={filtered} setFiltered={setFiltered}/>
+                            <PlaceCard place={place} filtered={filtered} setFiltered={setFiltered} />
                         </div>)
                 ):
                 (

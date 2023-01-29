@@ -14,6 +14,7 @@ const App = () => {
       <NavBar token={ token } setToken={ setToken }/>
       <Routes>
             <Route path='/' element={<ListPlaces />}/>
+            <Route path='/:username' element={<ListPlaces />}/>
             <Route path='/insert' element={<RequireAuth token={ token }><InsertPlace /></RequireAuth>}/>
             <Route path='/login' element={<RequireUnAuth token={ token }><Login setToken={ setToken }/></RequireUnAuth>}/>
             <Route path='/register' element={<RequireUnAuth token={ token }><Register setToken={ setToken }/></RequireUnAuth>}/>

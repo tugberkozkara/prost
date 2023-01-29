@@ -39,7 +39,7 @@ const PlaceCard = ({ place, filtered, setFiltered }) => {
                     <h5 className="card-title">{place?.name}</h5>
                     <p className="card-text">{place?.location}</p>
                     <a href={place?.menu} target="_blank" rel="noreferrer" className="btn btn-primary">Menu</a>
-                    <p className="card-text small">Added by <Link to={place?.createdBy?.username}>{place?.createdBy?.username}</Link></p>
+                    <p className="card-text small">Added by <a href={place?.createdBy?.username}>{place?.createdBy?.username}</a></p>
                     <div className='row'>
                     {
                         place.tags.map((tag, key) => (
