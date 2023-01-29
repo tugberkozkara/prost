@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import PlaceCard from '../components/PlaceCard';
 import Filter from '../components/Filter';
-import { API_URL_PLACES_GET_POST } from '../utils/constants';
+import { API_URL_PLACES } from '../utils/constants';
+import axios from 'axios';
 
 export default function ListPlaces(){
-    
+
     const [places, setPlaces] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const selectedTags = [];
@@ -13,17 +13,17 @@ export default function ListPlaces(){
 
     const getPlaces = async () => {
         try {
-          const allPlaces = await axios.get(API_URL_PLACES_GET_POST);
-          setPlaces(allPlaces.data);
-          setFiltered(allPlaces.data);
+            const allPlaces = await axios.get(API_URL_PLACES);
+            setPlaces(allPlaces.data);
+            setFiltered(allPlaces.data);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
     }
 
     useEffect(() => {
         getPlaces();
-      }, []);
+    }, []);
     
     const clearFilters = () => {
         setActiveTags([]);

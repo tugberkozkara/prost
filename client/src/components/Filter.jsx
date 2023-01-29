@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { API_URL_TAGS_GET_POST } from '../utils/constants';
+import { API_URL_TAGS } from '../utils/constants';
 import axios from 'axios';
 
 
@@ -9,7 +9,7 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
     
     const getTags = async () => {
         try {
-          const allTags = await axios.get(API_URL_TAGS_GET_POST);
+          const allTags = await axios.get(API_URL_TAGS);
           setTags(allTags.data);
         } catch (error) {
           console.log(error);
@@ -28,7 +28,7 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
         let checker = (arr, target) => target.every(element => arr.includes(element));
         const filtered = places.filter(place => checker(place.tags.map(tag => tag._id), activeTags));
         setFiltered(filtered);
-    }, [activeTags]);
+    }, [activeTags, places, setFiltered]);
 
     const tagHandle = (event) => {
         if(activeTags.includes(event.target.value)){
@@ -49,7 +49,7 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
                 return  (<div key={i} >
                             <button value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1 mt-2" name="tag">{tag.name}</button>
                         </div>);
-                return;
+                return (<></>)
             })
         }
     </div>

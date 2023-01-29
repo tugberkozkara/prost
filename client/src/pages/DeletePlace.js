@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { API_URL_PLACES_GET_POST } from '../utils/constants';
+import { API_URL_PLACES } from '../utils/constants';
 
 export const deletePlace = async (deleteId, token) => {
     try {
-        await axios.delete(API_URL_PLACES_GET_POST + "/" + deleteId, {
+        await axios.delete(API_URL_PLACES + "/" + deleteId, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
