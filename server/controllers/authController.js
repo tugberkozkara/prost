@@ -72,21 +72,13 @@ export default class AuthController{
     static loginUser = async (request, response) => {
         const {username, password} = request.body;
         const user = await User.findOne({username: username});
-        if(!user){
+        const isPasswordCorrect = await bcrypt.compare(password, user?.password).catch(()=>{return false;});
+        if(!user || !isPasswordCorrect){
             return response.status(401).json({
                 message: "Username or password is incorrect!",
             });
         }
-
-        const isPasswordTrue = await bcrypt.compare(password, user.password);
-        if(!isPasswordTrue){
-            return response.status(401).json({
-                message: "Username or password is incorrect!",
-            });
-        }
-
         const lastLoginDate = Date.now();
-
         try {
             await user.updateOne({lastLoginDate: lastLoginDate});
         } catch (error) {
@@ -97,8 +89,7 @@ export default class AuthController{
             username: user.username,
             password: user.password
         },
-        process.env.SECRET_KEY,
-        {
+        process.env.SECRET_KEY,{
             expiresIn :"2h"
         });
 
