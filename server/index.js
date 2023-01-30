@@ -5,9 +5,7 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 
-import authRouter from "./routers/authRouter.js";
-import placeRouter from "./routers/placeRouter.js";
-import tagRouter from "./routers/tagRouter.js";
+import apiRouter from "./routers/apiRouter.js";
 import "./config/db.js";
 
 const app = express();
@@ -32,9 +30,7 @@ app.get("/", (request, response) => {
     });
 });
 
-app.use("/users", authRouter);
-app.use("/places", placeRouter);
-app.use("/tags", tagRouter);
+app.use("/api", apiRouter);
 
 app.use("*", (request, response) => {
     return response.status(404).json({
