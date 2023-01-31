@@ -6,7 +6,7 @@ import AuthHandler from "../handlers/authHandler.js";
 var router = express.Router();
 var jsonParser = bodyParser.json();
 
-router.get("/", AuthHandler.checkAuth, AuthController.getAllUsers);
+router.get("/users", AuthHandler.checkAuth, AuthController.getAllUsers);
 router.post("/register", jsonParser, AuthController.createUser);
 router.post("/login", jsonParser, AuthController.loginUser);
 
