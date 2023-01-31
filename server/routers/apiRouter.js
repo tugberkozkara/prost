@@ -5,7 +5,7 @@ import tagRouter from "./tagRouter.js";
 
 var router = express.Router();
 
-router.use("/users", authRouter);
+router.use("/auth", authRouter);
 router.use("/places", placeRouter);
 router.use("/tags", tagRouter);
 
