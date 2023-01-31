@@ -1,4 +1,3 @@
-# Prost!
 
 <p align="center">
   <img src="./README-media/header.png" />
