@@ -40,10 +40,10 @@ const PlaceCard = ({ place, filtered, setFiltered }) => {
                     <p className="card-text">{place?.location}</p>
                     <a href={place?.menu} target="_blank" rel="noreferrer" className="btn btn-primary">Menu</a>
                     <p className="card-text small">Added by <a href={place?.createdBy?.username}>{place?.createdBy?.username}</a></p>
-                    <div className='row'>
+                    <div className='row px-3'>
                     {
                         place.tags.map((tag, key) => (
-                            <Link to={tag.name} key={key} className="card-text col-md-auto m-0 p-0 text-muted small">#{tag.name}</Link>
+                            <Link to={tag.name} key={key} className="card-text m-0 p-0 text-muted small">#{tag.name}</Link>
                             )
                         )
                     }

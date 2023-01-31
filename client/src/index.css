@@ -15,3 +15,24 @@ code {
 #place-card{
   width: 18rem;
 }
+
+.btn-secondary:focus, .btn-outline-secondary:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (hover: none) {
+  .btn-secondary:focus {
+    outline: none;
+    box-shadow: none;
+    color: #fff;
+    background-color: #6c757d;
+  }
+
+  .btn-outline-secondary:focus {
+    outline: none;
+    box-shadow: none;
+    color: #6c757d;
+    background-color: #fff;
+  }
+}
