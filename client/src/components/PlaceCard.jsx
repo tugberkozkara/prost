@@ -2,7 +2,6 @@ import React from 'react';
 import logo from '../components/apple-touch-icon.png';
 import Auth from '../utils/auth';
 import { deletePlace } from '../pages/DeletePlace';
-import { Link } from 'react-router-dom';
 
 const PlaceCard = ({ place, filtered, setFiltered }) => {
     
@@ -43,7 +42,7 @@ const PlaceCard = ({ place, filtered, setFiltered }) => {
                     <div className='row px-3'>
                     {
                         place.tags.map((tag, key) => (
-                            <Link to={tag.name} key={key} className="card-text m-0 p-0 text-muted small">#{tag.name}</Link>
+                            <p key={key} className="card-text m-0 p-0 text-muted small">#{tag.name}</p>
                             )
                         )
                     }
