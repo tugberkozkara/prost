@@ -91,16 +91,24 @@ export default class PlaceController{
 
     static deletePlaceById = async (request, response) => {
         const { id } = request.params;
-        let places = await Place.find({_id: {$ne : id }}).populate("tags");
+        let place = await Place.findOne({_id: id}).populate({ path: "createdBy", select: "username"});
 
+        if (!place || place.createdBy.username != request.userData.username) {
+            return response.status(404).json({
+                message: "Not found!",
+            });
+        }
+        
+        let remainingPlaces = await Place.find({_id: {$ne : id }}).populate("tags");
         const tagsOfPlace = await TagController.getTagsOfPlaceByPlaceId(id);
         tagsOfPlace.forEach(async tag => {
-            if(!TagController.isTagHasAnotherPlaces(tag._id, places)){
+            if(!TagController.isTagHasAnotherPlaces(tag._id, remainingPlaces)){
                 await Tag.findByIdAndDelete(tag._id);
             }
         });
+
         try {
-            await Place.findByIdAndDelete(id);
+            await place.delete();
         } catch (error) {
             return response.status(400).json({
                 message: error.message,
