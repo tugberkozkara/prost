@@ -22,14 +22,14 @@ code {
 }
 
 @media (hover: none) {
-  .btn-secondary:focus {
+  .btn-secondary:hover, .btn-secondary:focus {
     outline: none;
     box-shadow: none;
     color: #fff;
     background-color: #6c757d;
   }
 
-  .btn-outline-secondary:focus {
+  .btn-outline-secondary:hover, .btn-outline-secondary:focus {
     outline: none;
     box-shadow: none;
     color: #6c757d;
