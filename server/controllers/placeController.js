@@ -1,87 +1,37 @@
-import Place from "../models/place.js";
-import TagController from "./tagController.js";
-import AuthController from "./authController.js";
-import Tag from "../models/tag.js";
+import PlaceService from "../services/PlaceService.js";
 
 export default class PlaceController{
     
     static getAllPlaces = async (request, response) => {
-
         const tagParams = request.query.tag;
         const userParam = request.query.user;
-
-        try {
-            let allPlaces = await Place.find().populate([
-                {
-                    path: "createdBy",
-                    select: "username"
-                },
-                {
-                    path: "tags",
-                    select: "name"
-                }
-            ]);
-
-            if(tagParams !== undefined){
-                const tagQueryArray = tagParams.split(",").map(e => e.trim());
-                let checker = (arr, target) => target.every(element => arr.includes(element));
-                allPlaces = allPlaces.filter(place => checker(place.tags.map(tag => tag.name), tagQueryArray));
-            }
-
-            if(userParam !== undefined){
-                allPlaces = allPlaces.filter(place => place.createdBy.username == userParam);
-            }
-            
-            if(allPlaces.length === 0){
-                return response.status(404).json({
-                    message: "Not found!",
-                });
-            }
-            return response.status(200).json(allPlaces);
-        } catch (error) {
+        const places = await PlaceService.getAll(tagParams, userParam);
+        if(places === null){
             return response.status(404).json({
-                message: error.message,
+                message: "No places found!",
             });
         }
+        return response.status(200).json(places);
     };
 
     static createPlace = async (request, response) => {
-        const isPlaceExists = await Place.exists({name:request.body.name});
-        if(isPlaceExists){
+        const place = await PlaceService.create(request.body, request.userData);
+        if(place === null){
             return response.status(400).json({
                 message: "Place already exists!",
             });
         }
-
-        const userData = request.userData;
-
-        const place = new Place({
-            name: request.body.name,
-            category: request.body.category,
-            location: request.body.location,
-            price: request.body.price,
-            menu: request.body.menu,
-            tags: await TagController.getTagsByArray(request.body.tags),
-            createdBy: await AuthController.getUserByUsername(userData.username)
-        });
-        try {
-            await place.save();
-        } catch (error) {
-            return response.status(400).json({
-                message: error.message,
-            });
-        }
         return response.status(201).json({
             message: "Created successfully!",
+            place: place
         });
     };
 
 
     static getPlaceById = async (request, response) => {
         const { id } = request.params;
-        const place = await Place.findOne({_id: id});
-        
-        if(!place){
+        const place = await PlaceService.getById(id);
+        if(place === null){
             return response.status(404).json({
                 message: "Not found!",
             });
@@ -91,32 +41,29 @@ export default class PlaceController{
 
     static deletePlaceById = async (request, response) => {
         const { id } = request.params;
-        let place = await Place.findOne({_id: id}).populate({ path: "createdBy", select: "username"});
-
-        if (!place || place.createdBy.username != request.userData.username) {
+        const place = await PlaceService.getById(id);
+        if (place === null) {
             return response.status(404).json({
                 message: "Not found!",
             });
         }
-        
-        let remainingPlaces = await Place.find({_id: {$ne : id }}).populate("tags");
-        const tagsOfPlace = await TagController.getTagsOfPlaceByPlaceId(id);
-        tagsOfPlace.forEach(async tag => {
-            if(!TagController.isTagHasAnotherPlaces(tag._id, remainingPlaces)){
-                await Tag.findByIdAndDelete(tag._id);
-            }
-        });
-
+        const isPlaceAndUserMatch = PlaceService.isPlaceAndUserMatch(place, request.userData);
+        if (!isPlaceAndUserMatch) {
+            return response.status(401).json({
+                message: "Unauthorized!",
+            });
+        }
         try {
-            await place.delete();
+            const deletedPlace = await PlaceService.deleteById(id);
+            return response.status(200).json({
+                message: "Deleted successfully!",
+                place: deletedPlace
+            });
         } catch (error) {
             return response.status(400).json({
                 message: error.message,
             });
         }
-        return response.status(200).json({
-                message: "Deleted successfully!",
-            });
     };
 
 }
