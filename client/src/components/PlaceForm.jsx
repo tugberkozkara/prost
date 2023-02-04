@@ -79,7 +79,7 @@ const PlaceForm = () => {
             <input type="text" className="form-control" value={menu} onChange={changeHandle} placeholder="Menu URL" name="menu"></input>
             </div>
             <div className="input-group mb-3">
-            <input type="text" className="form-control" value={tags} onChange={changeHandle} placeholder="Tags" name="tags"></input>
+            <input type="text" className="form-control" value={tags} onChange={changeHandle} placeholder="Tags (e.g, food, alcohol, burger)" name="tags"></input>
             </div>
             <p>
             <button className="btn btn-primary my-2" type='submit' disabled={!fillRequired}>SUBMIT</button>
