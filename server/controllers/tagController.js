@@ -1,33 +1,23 @@
-import Tag from "../models/tag.js";
-import Place from "../models/place.js";
+import TagService from "../services/TagService.js";
 
 export default class TagController{
 
     static getAllTags = async (request, response) => {
-        try {
-            const allTags = await Tag.find();
-            response.status(200).json(allTags);
-        } catch (error) {
-            response.status(404).json({
-                message: error.message,
+        const allTags = await TagService.getAll();
+        if(allTags === null){
+            return response.status(404).json({
+                message: "No tags found!",
             });
         }
+        return response.status(200).json(allTags);
     };
 
     static createTag = async (request, response) => {
         const { name } = request.body;
-        const isTagExists = await Tag.exists({name: name});
-        if(isTagExists){
+        const tag = await TagService.create(name);
+        if(tag === null){
             return response.status(400).json({
                 message: "Tag already exists!",
-            });
-        }
-        const tag = new Tag({ name: name });
-        try {
-            await tag.save();
-        } catch (error) {
-            return response.status(400).json({
-                message: error.message,
             });
         }
         return response.status(201).json({
@@ -36,47 +26,16 @@ export default class TagController{
         });
     };
 
-    static getTagsByArray = async (tagsString) => {
-        const tagStringArray = tagsString.split(",").map(e => e.trim());
-        const allTags = await Tag.find();
-        const tagObjectArray = [];
-    
-        for (let index = 0; index < tagStringArray.length; index++) {
-            const name = tagStringArray[index];
-    
-            if(!allTags.some(e => e.name === name)){
-                const tag = new Tag({ name: name });
-                const newTag = await tag.save();
-                tagObjectArray.push(newTag);
-            }
-            else{
-                const tag = allTags.find(e => e.name === name);
-                tagObjectArray.push(tag);
-            }
-        }
-        return tagObjectArray;
-    };
-
     static deleteTagById = async (request, response) => {
         const { id } = request.params;
-        try {
-            await Tag.findByIdAndDelete(id);
-        } catch (error) {
-            return response.status(400).json({
-                message: error.message,
+        const isDeleted = await TagService.deleteById(id);
+        if (!isDeleted) {
+            return response.status(404).json({
+                message: "Not found!",
             });
         }
         return response.status(200).json({
             message: "Deleted successfully!",
         });
-    }
-
-    static getTagsOfPlaceByPlaceId = async (id) => {
-        const place = await Place.findById(id).populate("tags");
-        return place.tags;
-    }
-
-    static isTagHasAnotherPlaces = (id, places) => {
-        return places.some(place => place.tags.some(tag => String(tag._id) === String(id)));
-    }
+    };
 }
