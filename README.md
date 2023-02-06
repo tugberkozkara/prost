@@ -34,14 +34,14 @@ Example request body:
 Example success response: 201 Created
 ```
 {
-    "message": "Created successfully!",
+    "message": "Register Successful!",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsZWFub3JyaWdieSIsImlhdCI6MTY3NTIwMTk1MSwiZXhwIjoxNjc1MjA5MTUxfQ.TJAP4Zi8zI7XcPjXIiw6yCK4mpwlh5752GVIje5UpQI"
 }
 ```
 Example fail response: 400 Bad Request
 ```
 {
-    "message": "Email already registered!"
+    "message": "User already exists!"
 }
 ```
 
@@ -134,7 +134,7 @@ Example success response: 200 OK
 Example fail response: 404 Not Found
 ```
 {
-    "message": "Not found!"
+    "message": "No places found!"
 }
 ```
 
@@ -158,6 +158,12 @@ Example success response: 201 Created
 ```
 {
     "message": "Created successfully!"
+}
+```
+Example fail response: 400 Bad Request
+```
+{
+    "message": "Place already exists!"
 }
 ```
 Example fail response: 401 Unauthorized
@@ -219,6 +225,6 @@ Example success response: 200 OK
 Example fail response: 401 Unauthorized
 ```
 {
-    "message": "Auth failed"
+    "message": "Unauthorized!"
 }
 ```
