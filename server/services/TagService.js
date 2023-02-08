@@ -1,4 +1,4 @@
-import Tag  from '../models/tag.js';
+import Tag from "../models/tag.js";
 
 export default class TagService{
 
@@ -60,7 +60,7 @@ export default class TagService{
     static isTagHasAnotherPlaces = (id, places) => {
         if (places === null || places === undefined || places.length === 0) {
             return false;
-        };
+        }
         return places.some(place => place.tags.some(tag => String(tag._id) === String(id)));
-    }
+    };
 }
