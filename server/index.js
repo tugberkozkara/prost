@@ -4,11 +4,13 @@ import https from "https";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import monitor from "express-status-monitor";
 
 import apiRouter from "./routers/apiRouter.js";
 import "./config/db.js";
 
 const app = express();
+app.use(monitor());
 app.use(express.json());
 app.use(cors());
 
