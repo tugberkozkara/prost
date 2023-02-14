@@ -6,6 +6,7 @@ import ListPlaces from './pages/ListPlaces';
 import InsertPlace from './pages/InsertPlace';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Construction from './pages/Construction';
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -18,6 +19,7 @@ const App = () => {
             <Route path='/insert' element={<RequireAuth token={ token }><InsertPlace /></RequireAuth>}/>
             <Route path='/login' element={<RequireUnAuth token={ token }><Login setToken={ setToken }/></RequireUnAuth>}/>
             <Route path='/register' element={<RequireUnAuth token={ token }><Register setToken={ setToken }/></RequireUnAuth>}/>
+            <Route path='/503' element={<Construction />}/>
       </Routes>
     </div>
   )

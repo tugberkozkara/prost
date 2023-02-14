@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../components/apple-touch-icon.png';
+import logo from '../media/apple-touch-icon.png';
 import Auth from '../utils/auth';
 import { deletePlace } from '../pages/DeletePlace';
 

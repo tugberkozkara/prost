@@ -3,7 +3,7 @@ import PlaceCard from '../components/PlaceCard';
 import Filter from '../components/Filter';
 import { API_URL_PLACES } from '../utils/constants';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function ListPlaces(){
 
@@ -11,6 +11,7 @@ export default function ListPlaces(){
     const [filtered, setFiltered] = useState([]);
     const selectedTags = [];
     const [activeTags, setActiveTags] = useState(selectedTags);
+    const navigate = useNavigate();
     
     const params = useParams(null);
 
@@ -25,7 +26,9 @@ export default function ListPlaces(){
             setPlaces(allPlaces.data);
             setFiltered(allPlaces.data);
         } catch (error) {
-            console.log(error);
+            if (error.message === "Network Error") {
+                navigate("/503");
+            }
         }
     }
 
