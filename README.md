@@ -3,7 +3,7 @@
   <img src="./README-media/header.png" />
 </p>
 
-## [prost-to.netlify.app](https://prost-to.netlify.app/)
+## [prost.rocks](https://prost.rocks/)
 </br>
 
 ## **Definition:**
@@ -17,7 +17,7 @@ Users can create their accounts and share places with name, category, location a
 ## **Stack:**
 **Backend:** Node.js, Express, MongoDB, AWS EC2
 </br>
-**Frontend:** React, Netlify
+**Frontend:** React, AWS S3
 </br>
 </br>
 </br>
