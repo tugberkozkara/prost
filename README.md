@@ -3,7 +3,11 @@
   <img src="./README-media/header.png" />
 </p>
 
-## [prost.rocks](https://prost.rocks/)
+<h1 align="center">
+  Web page: <a href="https://prost.rocks/" target="_blank" rel="noopener noreferrer">prost.rocks</a>
+  </br>
+  Backend/API: <a href="https://api.prost.rocks/" target="_blank" rel="noopener noreferrer">api.prost.rocks</a>
+</h1>
 </br>
 
 ## **Definition:**
@@ -22,7 +26,10 @@ Users can create their accounts and share places with name, category, location a
 </br>
 </br>
 ## Backend/API Usage:
-### Register |  POST - /api/auth/register
+
+### Register |  POST - `/auth/register`
+`https://api.prost.rocks/auth/register`
+
 Example request body:
 ```
 {
@@ -45,7 +52,9 @@ Example fail response: 400 Bad Request
 }
 ```
 
-### Login |  POST - /api/auth/login
+### Login |  POST - `/auth/login`
+`https://api.prost.rocks/auth/login`
+
 Example request body:
 ```
 {
@@ -67,7 +76,9 @@ Example fail response: 401 Unauthorized
 }
 ```
 
-### All Users |  GET - /api/auth/users
+### All Users |  GET - `/auth/users`
+`https://api.prost.rocks/auth/register`
+
 Example request header:
 ```
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsZWFub3JyaWdieSIsInBhc3N3b3JkIjoiJDJiJDEwJDMwLmJ1Rk9nLzRtOUdhZjExdkNZcS5UQkthaGN1bDJBWllKRi45Ny9aanNMVmhHVUZCdWVtIiwiaWF0IjoxNjc1MjAyMjkwLCJleHAiOjE2NzUyMDk0OTB9.lHp4buGoAXkTD9shyi1ICQ6hApFFsVyxNLq-136qulY
@@ -93,7 +104,8 @@ Example fail response: 401 Unauthorized
 }
 ```
 
-### All Places |  GET - /api/places
+### All Places |  GET - `/places`
+`https://api.prost.rocks/places`
 
 Example success response: 200 OK
 ```
@@ -138,7 +150,9 @@ Example fail response: 404 Not Found
 }
 ```
 
-### Create Place |  POST - /api/places
+### Create Place |  POST - `/places`
+`https://api.prost.rocks/places`
+
 Example request header:
 ```
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsZWFub3JyaWdieSIsInBhc3N3b3JkIjoiJDJiJDEwJDMwLmJ1Rk9nLzRtOUdhZjExdkNZcS5UQkthaGN1bDJBWllKRi45Ny9aanNMVmhHVUZCdWVtIiwiaWF0IjoxNjc1MjAyMjkwLCJleHAiOjE2NzUyMDk0OTB9.lHp4buGoAXkTD9shyi1ICQ6hApFFsVyxNLq-136qulY
@@ -173,10 +187,12 @@ Example fail response: 401 Unauthorized
 }
 ```
 
-### Place By Id |  GET - /api/places/{place_id}
+### Place By Id |  GET - `/places/{place_id}`
+`https://api.prost.rocks/places/63d1a04181f71a232f954887`
+
 Example request:
 ```
-/api/places/63d1a04181f71a232f954887
+/places/63d1a04181f71a232f954887
 ```
 Example success response: 200 OK
 ```
@@ -207,10 +223,12 @@ Example fail response: 404 Not Found
 }
 ```
 
-### Place By Id |  DELETE - /api/places/{place_id}
+### Place By Id |  DELETE - `/places/{place_id}`
+`https://api.prost.rocks/places/63d1a04181f71a232f954887`
+
 Example request:
 ```
-/api/places/63d1a04181f71a232f954887
+/places/63d1a04181f71a232f954887
 ```
 Example request header:
 ```
