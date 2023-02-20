@@ -4,9 +4,9 @@
 </p>
 
 <h1 align="center">
-  Web page: <a href="https://prost.rocks/" target="_blank" rel="noopener noreferrer">prost.rocks</a>
+  Web page: <a href="https://prost.rocks/">prost.rocks</a>
   </br>
-  Backend/API: <a href="https://api.prost.rocks/" target="_blank" rel="noopener noreferrer">api.prost.rocks</a>
+  Backend/API: <a href="https://api.prost.rocks/">api.prost.rocks</a>
 </h1>
 </br>
 
