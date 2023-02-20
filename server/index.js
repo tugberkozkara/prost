@@ -13,6 +13,8 @@ const app = express();
 app.use(monitor());
 app.use(express.json());
 app.use(cors());
+app.use(apiRouter);
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,16 +32,3 @@ app.listen(5000, () => {
     console.log("HTTP server is running on port 5000");
 });
 
-app.get("/", (request, response) => {
-    return response.status(404).json({
-        message: "Not found!",
-    });
-});
-
-app.use("/api", apiRouter);
-
-app.use("*", (request, response) => {
-    return response.status(404).json({
-        message: "Not found!",
-    });
-});
