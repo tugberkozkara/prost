@@ -55,7 +55,7 @@ export default function ListPlaces(){
             <div className='row col-lg-8 mx-auto justify-content-center'>
                 {filtered.length !== 0 ? (
                     filtered.map((place, i) => 
-                        <div key={i} >
+                        <div key={i} className="w-auto">
                             <PlaceCard place={place} filtered={filtered} setFiltered={setFiltered} />
                         </div>)
                 ):

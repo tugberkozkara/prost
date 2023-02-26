@@ -35,14 +35,14 @@ const PlaceCard = ({ place, filtered, setFiltered }) => {
                 <img src={logo} className="rounded mx-auto d-block card-img-top"></img>
             </div>
                 <div className="card-body">
-                    <h5 className="card-title">{place?.name}</h5>
-                    <p className="card-text">{place?.location}</p>
+                    <h5 className="card-title fs-4">{place?.name}</h5>
+                    <p className="card-text fs-6">{place?.location}</p>
                     <a href={place?.menu} target="_blank" rel="noreferrer" className="btn btn-primary">Menu</a>
-                    <p className="card-text small">Added by <a href={place?.createdBy?.username}>{place?.createdBy?.username}</a></p>
+                    <p className="card-text small mt-2">Added by <a className="text-decoration-none" href={place?.createdBy?.username}>{place?.createdBy?.username}</a></p>
                     <div className='row px-3'>
                     {
                         place.tags.map((tag, key) => (
-                            <p key={key} className="card-text m-0 p-0 text-muted small">#{tag.name}</p>
+                            <p key={key} className="card-text m-0 p-0 w-auto text-muted" style={{fontSize:"80%"}}>#{tag.name}</p>
                             )
                         )
                     }
