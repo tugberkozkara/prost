@@ -31,7 +31,7 @@ const PlaceCard = ({ place, filtered, setFiltered }) => {
         <div className="col mb-4">
             <div className="card" id="place-card">
             <div className="d-flex justify-content-end">
-                {place?.createdBy?.username === parsedJWTPayload?.username ? <button className="btn btn-outline-danger position-absolute" onClick={deleteHandle} id={place?._id}>Delete</button>:<></>}
+                {place?.createdBy?.username === parsedJWTPayload?.username ? <button className="btn btn-outline-danger position-absolute" onClick={deleteHandle} id={place?._id}><span className="bi-trash-fill"></span></button>:<></>}
                 <img src={logo} className="rounded mx-auto d-block card-img-top"></img>
             </div>
                 <div className="card-body">

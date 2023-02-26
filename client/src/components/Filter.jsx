@@ -42,17 +42,37 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
     }
 
   return (
-    <div className="btn-group d-flex row col-lg-6 mx-auto mb-3 justify-content-center" role="group" aria-label="Basic example">
-        {
-            tags.map((tag, i) => {
-                if(i<10)
-                return  (<div key={i} >
-                            <button value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1 mt-2" name="tag">{tag.name}</button>
-                        </div>);
-                return (<></>)
-            })
-        }
-    </div>
+    <>
+    <nav className="navbar navbar-light bg-light d-flex row col-lg-6 col-md-8 col-sm-8 mx-auto mb-3 px-1">
+        <a className="navbar-brand w-auto text-muted">Couldn't find your spot?!</a>
+        <button className="navbar-toggler w-auto mx-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#filterToggler" aria-controls="filterToggler" aria-expanded="false">
+            <span className="bi-filter fs-2"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="filterToggler">
+            <div className="navbar-nav">
+                <div className="container mt-3 nav-item navbar-nav-scroll" style={{"--bs-scroll-height":"50vh"}}>
+                    <div className="row">
+                        <div className="col-sm">
+                            <a className="nav-link">Places</a>
+                            <button value="1" onClick="#" className="btn btn-outline-secondary mx-1 mt-2" name="tag">Ex. Place1</button>
+                            <button value="1" onClick="#" className="btn btn-outline-secondary mx-1 mt-2" name="tag">Ex. Place2</button>
+                            <button value="1" onClick="#" className="btn btn-outline-secondary mx-1 mt-2" name="tag">Ex. Place3</button>
+                        </div>
+                        <div className="col-sm">
+                            <a className="nav-link">Tags</a>
+                            {
+                                tags.map((tag, i) => {
+                                    return (<button key={i} value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1 mt-2" name="tag">{tag.name}</button>);
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </>
   )
 }
 
