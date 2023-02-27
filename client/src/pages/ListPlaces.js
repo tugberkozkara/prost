@@ -52,7 +52,7 @@ export default function ListPlaces(){
         <></>)}
         
         <Filter places={places} setFiltered={setFiltered} activeTags={activeTags} setActiveTags={setActiveTags}/>
-            <div className='row col-lg-8 mx-auto justify-content-center'>
+            <div className='row col-lg-8 col-xl-8 mx-auto justify-content-center'>
                 {filtered.length !== 0 ? (
                     filtered.map((place, i) => 
                         <div key={i} className="w-auto">

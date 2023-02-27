@@ -53,7 +53,7 @@ const RegisterForm = ({ setToken }) => {
 
 
   return (
-    <section className="text-center col-lg-3 mx-auto w-50">
+    <section className="text-center col col-lg-3 col-md-4 col-sm-6 col-6 mx-auto">
         <form onSubmit={submitHandle}>
             <div className="input-group mb-3">
             <input type="text" className="form-control" value={email} onChange={changeHandle} placeholder="Email" name="email" required></input>
@@ -67,14 +67,14 @@ const RegisterForm = ({ setToken }) => {
             <div className="input-group mb-3">
             <input type="password" className="form-control" value={passwordConfirm} onChange={changeHandle} placeholder="Password Again" name="passwordConfirm" required></input>
             </div>
-            <span className="col-7 text-danger my-0 pt-2 text-right pr-1">{passwordAlert}</span>
+            <span className="col-7 text-danger my-0 pt-2 pe-1">{passwordAlert}</span>
             <p className='mb-0'>
             <button className="btn btn-primary my-2" type='submit' disabled={passwordAlert != null || email === "" || username === ""}>Register</button>
             </p>
         </form>
         <div className='row justify-content-center'>
-            <span className="col-6 col-sm-7 col-m-8 col-lg-7 text-muted my-0 pt-2 text-right pr-1">Already have an account?</span>
-            <NavLink className="col nav-item nav-link text-left pl-1" to="/login">Login</NavLink>
+            <span className="col-6 col-sm-7 col-m-8 col-lg-7 text-muted my-0 pt-2 text-end pe-1">Already have an account?</span>
+            <NavLink className="col nav-item nav-link text-start ps-1" to="/login">Login</NavLink>
         </div>
     </section>
   )
