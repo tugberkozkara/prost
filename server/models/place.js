@@ -10,10 +10,11 @@ const placeSchema = new mongoose.Schema({
           type: String,
           required: true
      },
-     location: {
-          type: String,
+     location: [{
+          type: mongoose.Schema.Types.ObjectId,
+          ref:"Location",
           required: true
-     },
+     }],
      price: {
           type: String,
           required: true
