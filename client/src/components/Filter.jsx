@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import { API_URL_TAGS } from '../utils/constants';
+import { API_URL_LOCATIONS, API_URL_TAGS } from '../utils/constants';
 import axios from 'axios';
 
 
-const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
+const Filter = ({places, setFiltered, activeFilters, setActiveFilters}) => {
     const [tags, setTags] = useState([]);
-    
+    const [locations, setLocations] = useState([]);
     
     const getTags = async () => {
         try {
@@ -15,28 +15,42 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
           console.log(error);
         }
     }
+    const getLocations = async () => {
+        try {
+          const allLocations = await axios.get(API_URL_LOCATIONS);
+          setLocations(allLocations.data);
+        } catch (error) {
+          console.log(error);
+        }
+    }
 
     useEffect(() => { 
         getTags();
+        getLocations();
       }, []);
 
     useEffect(() => {
-        if(activeTags.length === 0){
+        if(activeFilters.length === 0){
             setFiltered(places);
             return;
         }
         let checker = (arr, target) => target.every(element => arr.includes(element));
-        const filtered = places.filter(place => checker(place.tags.map(tag => tag._id), activeTags));
+        
+        const filtered = places.filter(
+            (place) => (
+                checker(place.tags.map(tag => tag._id).concat(place.location.map(loc => loc._id)), activeFilters)
+            )
+        );
         setFiltered(filtered);
-    }, [activeTags, places, setFiltered]);
+    }, [activeFilters, places, setFiltered]);
 
-    const tagHandle = (event) => {
-        if(activeTags.includes(event.target.value)){
-            setActiveTags(activeTags.filter(id => id !== event.target.value));
+    const filterHandle = (event) => {
+        if(activeFilters.includes(event.target.value)){
+            setActiveFilters(activeFilters.filter(id => id !== event.target.value));
             event.target.className = "btn btn-outline-secondary mx-1 mt-2";
         }
         else{
-            setActiveTags((prevTags) => [...prevTags, event.target.value]);
+            setActiveFilters((prevFilters) => [...prevFilters, event.target.value]);
             event.target.className = "btn btn-secondary mx-1 mt-2";
         }
     }
@@ -54,16 +68,18 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags}) => {
                 <div className="container mt-3 nav-item navbar-nav-scroll" style={{"--bs-scroll-height":"50vh"}}>
                     <div className="row">
                         <div className="col-sm">
-                            <a className="nav-link">Places</a>
-                            <button value="1" onClick="#" className="btn btn-outline-secondary mx-1 mt-2" name="tag">Ex. Place1</button>
-                            <button value="1" onClick="#" className="btn btn-outline-secondary mx-1 mt-2" name="tag">Ex. Place2</button>
-                            <button value="1" onClick="#" className="btn btn-outline-secondary mx-1 mt-2" name="tag">Ex. Place3</button>
+                            <a className="nav-link">Locations</a>
+                            {
+                                locations.map((location, i) => {
+                                    return (<button key={i} value={location._id} onClick={filterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{location.name}</button>);
+                                })
+                            }
                         </div>
                         <div className="col-sm">
                             <a className="nav-link">Tags</a>
                             {
                                 tags.map((tag, i) => {
-                                    return (<button key={i} value={tag._id} onClick={tagHandle} className="btn btn-outline-secondary mx-1 mt-2" name="tag">{tag.name}</button>);
+                                    return (<button key={i} value={tag._id} onClick={filterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{tag.name}</button>);
                                 })
                             }
                         </div>

@@ -9,8 +9,8 @@ export default function ListPlaces(){
 
     const [places, setPlaces] = useState([]);
     const [filtered, setFiltered] = useState([]);
-    const selectedTags = [];
-    const [activeTags, setActiveTags] = useState(selectedTags);
+    const selectedFilters = [];
+    const [activeFilters, setActiveFilters] = useState(selectedFilters);
     const navigate = useNavigate();
     
     const params = useParams(null);
@@ -37,9 +37,9 @@ export default function ListPlaces(){
     }, []);
     
     const clearFilters = () => {
-        setActiveTags([]);
-        const tagButtons = document.getElementsByName('tag');
-        tagButtons.forEach((tag) => (tag.className = "btn btn-outline-secondary mx-1 mt-2"));
+        setActiveFilters([]);
+        const filterButtons = document.getElementsByName('filterButton');
+        filterButtons.forEach((filterButton) => (filterButton.className = "btn btn-outline-secondary mx-1 mt-2"));
     }
 
     return(
@@ -51,7 +51,7 @@ export default function ListPlaces(){
         ):(
         <></>)}
         
-        <Filter places={places} setFiltered={setFiltered} activeTags={activeTags} setActiveTags={setActiveTags}/>
+        <Filter places={places} setFiltered={setFiltered} activeFilters={activeFilters} setActiveFilters={setActiveFilters}/>
             <div className='row col-lg-8 col-xl-8 mx-auto justify-content-center'>
                 {filtered.length !== 0 ? (
                     filtered.map((place, i) => 

@@ -26,26 +26,22 @@ const NavBar = ({ token, setToken }) => {
       }, [setToken, token]);
   return (
     <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
             <a className="navbar-brand" href="/">Prost!</a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
+            <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+            <span className="bi-three-dots fs-2"></span>
             </button>
-            <div className="collapse navbar-collapse show" id="navbarNavAltMarkup">
+            <div className="collapse navbar-collapse show justify-content-end" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                    <NavLink className="nav-item nav-link active" to="/">Home</NavLink>
-                    {token ? (<NavLink className="nav-item nav-link" to="/insert">Insert</NavLink>):(<></>)}
+                    <NavLink className="nav-item nav-link active mx-2" to="/">Home</NavLink>
+                    {token && !isTokenExpired ? (<>
+                    <NavLink className="nav-item nav-link mx-2" to="/insert">Insert</NavLink>
+                    <NavLink className="col nav-item nav-link mx-2 text-muted" onClick={e => expireToken()}>Logout <span className="col text-muted my-0 pt-2">{username}</span></NavLink>
+                    </>):(<>
+                    <NavLink className="nav-item nav-link px-0 mx-2" to="/login">Login</NavLink>
+                    </>)}
                 </div>
             </div>
-            {token && !isTokenExpired ? (
-                <div className='row'>
-                    <NavLink className="col nav-item nav-link px-0" onClick={(e) => { expireToken()
-                      } }>Logout</NavLink>
-                    <span className="col text-muted my-0 pt-2">{username}</span>
-                </div>
-            ):(
-                <NavLink className="nav-item nav-link px-0" to="/login">Login</NavLink>
-                )}
         </nav>
         <section className="py-5 text-center container">
             <div className="row">
