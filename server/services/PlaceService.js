@@ -1,6 +1,7 @@
 import Place from "../models/place.js";
 import AuthService from "./AuthService.js";
 import TagService from "./TagService.js";
+import LocationService from "./LocationService.js";
 
 export default class PlaceService{
 
@@ -10,6 +11,8 @@ export default class PlaceService{
                     path: "createdBy", select: "username"
                 },{
                     path: "tags", select: "name"
+                },{
+                    path: "location", select: "name"
                 }
             ]);
 
@@ -38,6 +41,8 @@ export default class PlaceService{
                 path: "createdBy", select: "username"
             },{
                 path: "tags", select: "name"
+            },{
+                path: "location", select: "name"
             }
         ]);
             if(places.length === 0){
@@ -58,9 +63,9 @@ export default class PlaceService{
         const place = new Place({
             name: body.name,
             category: body.category,
-            location: body.location,
             price: body.price,
             menu: body.menu,
+            location: await LocationService.getLocationByArray(body.location),
             tags: await TagService.getTagsByArray(body.tags),
             createdBy: await AuthService.getUserByUsername(userData.username)
         });
@@ -78,6 +83,8 @@ export default class PlaceService{
                 path: "createdBy", select: "username"
             },{
                 path: "tags", select: "name"
+            },{
+                path: "location", select: "name"
             }
         ]);
             return place;
@@ -88,6 +95,7 @@ export default class PlaceService{
 
     static deleteById = async (id) => {
         await PlaceService.deleteTags(id);
+        await PlaceService.deleteLocations(id);
         try {
             const place = await Place.findByIdAndDelete(id);
             return place;
@@ -114,6 +122,21 @@ export default class PlaceService{
         tagsOfPlace.forEach(async tag => {
             if(!TagService.isTagHasAnotherPlaces(tag._id, remainingPlaces)){
                 await TagService.deleteById(tag._id);
+            }
+        });
+    };
+
+    static getLocationsOfPlace = async (id) => {
+        const place = await PlaceService.getById(id);
+        return place.location;
+    };
+
+    static deleteLocations = async (id) => {
+        const remainingPlaces = await PlaceService.getAllExceptOne(id);
+        const locationsOfPlace = await PlaceService.getLocationsOfPlace(id);
+        locationsOfPlace.forEach(async loc => {
+            if(!LocationService.isLocationHasAnotherPlaces(loc._id, remainingPlaces)){
+                await LocationService.deleteById(loc._id);
             }
         });
     };
