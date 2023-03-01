@@ -94,7 +94,6 @@ Example success response: 200 OK
         "lastLoginDate": "2023-01-31T21:59:41.846Z",
         "__v": 0
     },
-    {
     ...
 ```
 Example fail response: 401 Unauthorized
@@ -139,7 +138,122 @@ Example success response: 200 OK
         "updatedAt": "2023-01-25T21:33:53.967Z",
         "__v": 0
     },
+    ...
+  
+```
+Example fail response: 404 Not Found
+```
+{
+    "message": "No places found!"
+}
+```
+
+### Places by a user |  GET - `/places?user={username}`
+`https://api.prost.rocks/places?user=paulmccartney`
+
+Example success response: 200 OK
+```
+[
     {
+        "_id": "63fcb62c8293f11bdbb71505",
+        "name": "Hangout Bahçe",
+        "category": "Beer Garden",
+        "location": [
+            {
+                "_id": "63fcb62b8293f11bdbb714fb",
+                "name": "Bornova"
+            }
+        ],
+        "price": "$$$",
+        "menu": "https://www.hangout.com.tr/sayfa/22/menu",
+        "tags": [
+            {
+                "_id": "63fcb62c8293f11bdbb714fe",
+                "name": "burger"
+            },
+            {
+                "_id": "63fcb62c8293f11bdbb71500",
+                "name": "hotdog"
+            },
+            {
+                "_id": "63d691e7767f40c04a2c1135",
+                "name": "pizza"
+            },
+            {
+                "_id": "63d1a01d81f71a232f954877",
+                "name": "alcohol"
+            },
+            {
+                "_id": "63fcb62c8293f11bdbb71502",
+                "name": "coffee"
+            },
+            {
+                "_id": "63d1a01d81f71a232f954875",
+                "name": "outdoor"
+            }
+        ],
+        "createdBy": {
+            "_id": "63fcb5c68293f11bdbb714e5",
+            "username": "paulmccartney"
+        },
+        "createdAt": "2023-02-27T13:54:52.981Z",
+        "updatedAt": "2023-02-27T13:54:52.981Z",
+        "__v": 0
+    },
+    ...
+  
+```
+Example fail response: 404 Not Found
+```
+{
+    "message": "No places found!"
+}
+```
+
+### Places with tags |  GET - `/places?tag={[name]}`
+`https://api.prost.rocks/places?tag=taco,burrito`
+
+Example success response: 200 OK
+```
+[
+    {
+        "_id": "63fcc5d48293f11bdbb7163b",
+        "name": "Zemin",
+        "category": "Restaurant",
+        "location": [
+            {
+                "_id": "63fcc5d48293f11bdbb71633",
+                "name": "Bostanlı"
+            }
+        ],
+        "price": "$$$$",
+        "menu": "https://menu.zeminizmir.com/",
+        "tags": [
+            {
+                "_id": "63fcc5d48293f11bdbb71636",
+                "name": "taco"
+            },
+            {
+                "_id": "63fcc5d48293f11bdbb71638",
+                "name": "burrito"
+            },
+            {
+                "_id": "63fca68ed9df11bd8987b245",
+                "name": "indoor"
+            },
+            {
+                "_id": "63d1a01d81f71a232f954875",
+                "name": "outdoor"
+            }
+        ],
+        "createdBy": {
+            "_id": "63fcb5c68293f11bdbb714e5",
+            "username": "paulmccartney"
+        },
+        "createdAt": "2023-02-27T15:01:40.993Z",
+        "updatedAt": "2023-02-27T15:01:40.993Z",
+        "__v": 0
+    },
     ...
   
 ```
@@ -244,5 +358,67 @@ Example fail response: 401 Unauthorized
 ```
 {
     "message": "Unauthorized!"
+}
+```
+
+### All Tags |  GET - `/tags`
+`https://api.prost.rocks/tags`
+
+Example success response: 200 OK
+```
+[
+    {
+        "_id": "63d1a01d81f71a232f954875",
+        "name": "outdoor",
+        "__v": 0
+    },
+    {
+        "_id": "63d1a01d81f71a232f954877",
+        "name": "alcohol",
+        "__v": 0
+    },
+    {
+        "_id": "63d691e7767f40c04a2c1135",
+        "name": "pizza",
+        "__v": 0
+    },
+    ...
+  
+```
+Example fail response: 404 Not Found
+```
+{
+    "message": "No tags found!"
+}
+```
+
+### All Locations |  GET - `/locations`
+`https://api.prost.rocks/locations`
+
+Example success response: 200 OK
+```
+[
+    {
+        "_id": "63fcb62b8293f11bdbb714fb",
+        "name": "Bornova",
+        "__v": 0
+    },
+    {
+        "_id": "63fcb6768293f11bdbb71515",
+        "name": "İnciraltı",
+        "__v": 0
+    },
+    {
+        "_id": "63fcb6f98293f11bdbb71525",
+        "name": "Evka 3",
+        "__v": 0
+    },
+    ...
+  
+```
+Example fail response: 404 Not Found
+```
+{
+    "message": "No locations found!"
 }
 ```
