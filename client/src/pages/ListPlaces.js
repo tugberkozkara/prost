@@ -68,6 +68,9 @@ export default function ListPlaces(){
                         </div>
                     </div>
                 )}
+                <div className="text-center">
+                    <p className="text-muted small">Icons made by <a className="text-decoration-none" href="https://www.flaticon.com/authors/freepik">Freepik</a> from <a className="text-decoration-none" href="https://www.flaticon.com">www.flaticon.com</a>.</p>
+                </div>
             </div>
         </>
     )
