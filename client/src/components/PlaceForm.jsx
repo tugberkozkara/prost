@@ -18,7 +18,7 @@ const PlaceForm = () => {
             'name': () => setName(event.target.value),
             'category': () => setCategory(event.target.value),
             'location': () => setLocation(event.target.value),
-            'price': () => setPrice(event.target.value),
+            'price': () => setPrice("$".repeat(event.target.value)),
             'menu': () => setMenu(event.target.value),
             'tags': () => setTags(event.target.value)
         };
@@ -67,19 +67,28 @@ const PlaceForm = () => {
             <input type="text" className="form-control" value={name} onChange={changeHandle} placeholder="Name" name="name" required></input>
             </div>
             <div className="input-group mb-3">
-            <input type="text" className="form-control" value={category} onChange={changeHandle} placeholder="Category" name="category" required></input>
+            <select className="form-select" value={category} onChange={changeHandle} name="category" required>
+                <option value="" disabled hidden className="text-muted fs-2">Category</option>
+                <option value="Bar & Pub">Bar & Pub</option>
+                <option value="Beer Garden">Beer Garden</option>
+                <option value="Fine Dine">Fine Dine</option>
+                <option value="Fast Food">Fast Food</option>
+                <option value="Coffee Shop">Coffee Shop</option>
+                <option value="Bakery">Bakery</option>
+            </select>
             </div>
             <div className="input-group mb-3">
             <input type="text" className="form-control" value={location} onChange={changeHandle} placeholder="Location" name="location" required></input>
             </div>
             <div className="input-group mb-3">
-            <input type="text" className="form-control" value={price} onChange={changeHandle} placeholder="Price" name="price" required></input>
+            <label htmlFor="customRange3" className="form-label text-muted">Price {price}</label>
+            <input type="range"  className="form-range" min="1" max="5" defaultValue={1} onChange={changeHandle} name="price" required></input>
             </div>
             <div className="input-group mb-3">
             <input type="text" className="form-control" value={menu} onChange={changeHandle} placeholder="Menu URL" name="menu"></input>
             </div>
             <div className="input-group mb-3">
-            <input type="text" className="form-control" value={tags} onChange={changeHandle} placeholder="Tags (e.g, food, alcohol, burger)" name="tags"></input>
+            <input type="text" className="form-control" value={tags} onChange={changeHandle} placeholder="Tags (e.g, outdoor, alcohol, burger)" name="tags"></input>
             </div>
             <p>
             <button className="btn btn-primary my-2" type='submit' disabled={!fillRequired}>SUBMIT</button>
