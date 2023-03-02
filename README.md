@@ -3,11 +3,11 @@
   <img src="./README-media/header.png" />
 </p>
 
-<h1 align="center">
-  Web page: <a href="https://prost.rocks/">prost.rocks</a>
+<h3 align="center">
+  <a href="https://prost.rocks/">prost.rocks</a>
   </br>
-  Backend/API: <a href="https://api.prost.rocks/">api.prost.rocks</a>
-</h1>
+  <a href="https://api.prost.rocks/">api.prost.rocks</a>
+</h3>
 </br>
 
 ## **Definition:**
