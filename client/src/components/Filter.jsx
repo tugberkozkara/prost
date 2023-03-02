@@ -65,7 +65,7 @@ const Filter = ({places, setFiltered, activeFilters, setActiveFilters}) => {
 
         <div className="collapse navbar-collapse" id="filterToggler">
             <div className="navbar-nav">
-                <div className="container mt-3 nav-item navbar-nav-scroll" style={{"--bs-scroll-height":"50vh"}}>
+                <div className="container mt-3 nav-item navbar-nav-scroll" style={{"--bs-scroll-height":"40vh"}}>
                     <div className="row">
                         <div className="col-sm">
                             <a className="nav-link">Locations</a>

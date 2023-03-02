@@ -31,7 +31,7 @@ const NavBar = ({ token, setToken }) => {
             <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
             <span className="bi-three-dots fs-2"></span>
             </button>
-            <div className="collapse navbar-collapse show justify-content-end" id="navbarNavAltMarkup">
+            <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
                     <NavLink className="nav-item nav-link active mx-2" to="/">Home</NavLink>
                     {token && !isTokenExpired ? (<>
@@ -47,7 +47,7 @@ const NavBar = ({ token, setToken }) => {
             <div className="row">
                 <div className="col-lg-6 col-md-8 mx-auto">
                     <h1 className="fw-normal ">Prost!</h1>
-                    <p className="lead text-muted">Càfes, pubs etc.</p>
+                    <p className="lead text-muted">Cafés, pubs etc.</p>
                 </div>
             </div>
         </section>

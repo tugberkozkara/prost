@@ -2,7 +2,7 @@ import underConstrImg from '../media/503.png';
 
 const Construction = () => {
   return (
-    <div className='row col-lg-8 mx-auto my-0 justify-content-center'>
+    <div className='row col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto my-0 justify-content-center'>
         <div className="card align-items-center border-white">
             <img src={underConstrImg} className="card-img-top rounded col-lg-8" />
             <div className="card-body p-5 text-center">
