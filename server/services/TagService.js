@@ -33,7 +33,8 @@ export default class TagService{
         const tagObjectArray = [];
     
         for (let index = 0; index < tagStringArray.length; index++) {
-            const name = tagStringArray[index];
+            let name = tagStringArray[index];
+            name = name.toLowerCase();
     
             if(!allTags.some(e => e.name === name)){
                 const tag = new Tag({ name: name });
