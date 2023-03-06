@@ -34,8 +34,8 @@ export default class LocationService{
     
         for (let index = 0; index < locationStringArray.length; index++) {
             let name = locationStringArray[index];
-            name = name.toLowerCase();
-            name = name.charAt(0).toUpperCase() + name.slice(1);
+            name = name.toLocaleLowerCase("tr-TR");
+            name = name.charAt(0).toLocaleUpperCase("tr-TR") + name.slice(1);
     
             if(!allLocations.some(e => e.name === name)){
                 const location = new Location({ name: name });
