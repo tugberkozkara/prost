@@ -4,7 +4,7 @@ export default class LocationService{
 
     static getAll = async () => {
         try {
-            const locations = await Location.find();
+            const locations = await Location.find().collation({locale: "tr"}).sort({name: "asc"});
             return locations;   
         } catch (error) {
             return null;

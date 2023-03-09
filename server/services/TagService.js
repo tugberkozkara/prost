@@ -34,7 +34,7 @@ export default class TagService{
     
         for (let index = 0; index < tagStringArray.length; index++) {
             let name = tagStringArray[index];
-            name = name.toLowerCase();
+            name = name.toLocaleLowerCase("tr-TR");
     
             if(!allTags.some(e => e.name === name)){
                 const tag = new Tag({ name: name });
