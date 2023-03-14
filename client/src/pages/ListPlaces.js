@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import PlaceCard from '../components/PlaceCard';
 import Filter from '../components/Filter';
+import ProfileHeader from '../components/ProfileHeader';
 import { API_URL_PLACES } from '../utils/constants';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
@@ -45,9 +46,7 @@ export default function ListPlaces(){
     return(
         <>
         {params?.username ? (
-            <blockquote className="blockquote text-center">
-                <p className="mb-0">places by {params?.username}</p>
-            </blockquote>
+            <ProfileHeader username={params?.username} places={places} />
         ):(
         <></>)}
         
