@@ -41,6 +41,8 @@ export default function ListPlaces(){
         setActiveFilters([]);
         const filterButtons = document.getElementsByName('filterButton');
         filterButtons.forEach((filterButton) => (filterButton.className = "btn btn-outline-secondary mx-1 mt-2"));
+        const searchInput = document.getElementById('searchInput');
+        searchInput.value = "";
     }
 
     return(

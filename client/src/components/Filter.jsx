@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { API_URL_LOCATIONS, API_URL_TAGS } from '../utils/constants';
+import Search from "./Search";
 import axios from 'axios';
 
 
@@ -66,6 +67,9 @@ const Filter = ({places, setFiltered, activeFilters, setActiveFilters}) => {
         <div className="collapse navbar-collapse" id="filterToggler">
             <div className="navbar-nav">
                 <div className="container mt-3 nav-item navbar-nav-scroll" style={{"--bs-scroll-height":"40vh"}}>
+                    <div className="row">
+                        <Search places={places} setFiltered={setFiltered} />
+                    </div>
                     <div className="row">
                         <div className="col-sm">
                             <a className="nav-link">Locations</a>
