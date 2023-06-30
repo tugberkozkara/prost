@@ -9,7 +9,6 @@ const Search = ({ places, setFiltered }) => {
     }
 
     useEffect(() => {
-        console.log(search);
         if(search === ""){
             setFiltered(places);
             return;
@@ -20,7 +19,7 @@ const Search = ({ places, setFiltered }) => {
             )
         );
         setFiltered(searchFiltered);
-    }, [search, setFiltered]);
+    }, [search, places, setFiltered]);
 
 
   return (
