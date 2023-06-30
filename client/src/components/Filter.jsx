@@ -4,7 +4,7 @@ import Search from "./Search";
 import axios from 'axios';
 
 
-const Filter = ({places, setFiltered, activeFilters, setActiveFilters}) => {
+const Filter = ({places, setFiltered, activeTags, setActiveTags, activeLocations, setActiveLocations}) => {
     const [tags, setTags] = useState([]);
     const [locations, setLocations] = useState([]);
     
@@ -31,27 +31,65 @@ const Filter = ({places, setFiltered, activeFilters, setActiveFilters}) => {
       }, []);
 
     useEffect(() => {
-        if(activeFilters.length === 0){
-            setFiltered(places);
+        let filtered = places;
+
+        if(activeTags.length === 0 && activeLocations.length === 0){
+            setFiltered(filtered);
             return;
         }
-        let checker = (arr, target) => target.every(element => arr.includes(element));
-        
-        const filtered = places.filter(
-            (place) => (
-                checker(place.tags.map(tag => tag._id).concat(place.location.map(loc => loc._id)), activeFilters)
-            )
-        );
-        setFiltered(filtered);
-    }, [activeFilters, places, setFiltered]);
 
-    const filterHandle = (event) => {
-        if(activeFilters.includes(event.target.value)){
-            setActiveFilters(activeFilters.filter(id => id !== event.target.value));
+        const intersectionChecker = (arr, target) => target.every(element => arr.includes(element));
+        const unionChecker = (arr, target) => target.some(element => arr.includes(element));
+
+        let tagFiltered = [];
+        if(activeTags.length !== 0){
+            tagFiltered = filtered.filter(
+                (place) => (
+                    intersectionChecker(place.tags.map(tag => tag._id), activeTags)
+                )
+            );
+        }
+        let locationFiltered = [];
+        if(activeLocations.length !== 0){
+            locationFiltered = filtered.filter(
+                (place) => (
+                    unionChecker(place.location.map(loc => loc._id), activeLocations)
+                )
+            );
+        }
+        
+        filtered = places.filter(function(place) {
+                if(activeTags.length === 0)
+                    {return locationFiltered.includes(place);}
+                if(activeLocations.length === 0)
+                    {return tagFiltered.includes(place);}
+                else
+                    {return tagFiltered.includes(place) && locationFiltered.includes(place);}
+            }
+        );
+        
+        setFiltered(filtered);
+
+    }, [activeTags, activeLocations, places, setFiltered]);
+
+    const tagFilterHandle = (event) => {
+        if(activeTags.includes(event.target.value)){
+            setActiveTags(activeTags.filter(id => id !== event.target.value));
             event.target.className = "btn btn-outline-secondary mx-1 mt-2";
         }
         else{
-            setActiveFilters((prevFilters) => [...prevFilters, event.target.value]);
+            setActiveTags((prevFilters) => [...prevFilters, event.target.value]);
+            event.target.className = "btn btn-secondary mx-1 mt-2";
+        }
+    }
+
+    const locationFilterHandle = (event) => {
+        if(activeLocations.includes(event.target.value)){
+            setActiveLocations(activeLocations.filter(id => id !== event.target.value));
+            event.target.className = "btn btn-outline-secondary mx-1 mt-2";
+        }
+        else{
+            setActiveLocations((prevFilters) => [...prevFilters, event.target.value]);
             event.target.className = "btn btn-secondary mx-1 mt-2";
         }
     }
@@ -75,7 +113,7 @@ const Filter = ({places, setFiltered, activeFilters, setActiveFilters}) => {
                             <a className="nav-link">Locations</a>
                             {
                                 locations.map((location, i) => {
-                                    return (<button key={i} value={location._id} onClick={filterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{location.name}</button>);
+                                    return (<button key={i} value={location._id} onClick={locationFilterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{location.name}</button>);
                                 })
                             }
                         </div>
@@ -83,7 +121,7 @@ const Filter = ({places, setFiltered, activeFilters, setActiveFilters}) => {
                             <a className="nav-link">Tags</a>
                             {
                                 tags.map((tag, i) => {
-                                    return (<button key={i} value={tag._id} onClick={filterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{tag.name}</button>);
+                                    return (<button key={i} value={tag._id} onClick={tagFilterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{tag.name}</button>);
                                 })
                             }
                         </div>
