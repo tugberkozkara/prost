@@ -6,14 +6,15 @@ import { API_URL_PLACES } from '../utils/constants';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function ListPlaces(){
 
+export default function ListPlaces(){
     const [places, setPlaces] = useState([]);
     const [filtered, setFiltered] = useState([]);
-    const selectedFilters = [];
-    const [activeFilters, setActiveFilters] = useState(selectedFilters);
+
+    const [activeTags, setActiveTags] = useState([]);
+    const [activeLocations, setActiveLocations] = useState([]);
+
     const navigate = useNavigate();
-    
     const params = useParams(null);
 
     const getPlaces = async () => {
@@ -38,7 +39,8 @@ export default function ListPlaces(){
     }, []);
     
     const clearFilters = () => {
-        setActiveFilters([]);
+        setActiveTags([]);
+        setActiveLocations([]);
         const filterButtons = document.getElementsByName('filterButton');
         filterButtons.forEach((filterButton) => (filterButton.className = "btn btn-outline-secondary mx-1 mt-2"));
         const searchInput = document.getElementById('searchInput');
@@ -52,7 +54,7 @@ export default function ListPlaces(){
         ):(
         <></>)}
         
-        <Filter places={places} setFiltered={setFiltered} activeFilters={activeFilters} setActiveFilters={setActiveFilters}/>
+        <Filter places={places} filtered={filtered} setFiltered={setFiltered} activeTags={activeTags} setActiveTags={setActiveTags} activeLocations={activeLocations} setActiveLocations={setActiveLocations} />
             <div className='row col-lg-8 col-xl-8 mx-auto justify-content-center'>
                 {filtered.length !== 0 ? (
                     filtered.map((place, i) => 
