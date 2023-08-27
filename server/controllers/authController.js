@@ -1,6 +1,6 @@
-import AuthService from "../services/AuthService.js";
+const AuthService = require("../services/AuthService");
 
-export default class AuthController {
+class AuthController {
 
     static getAllUsers = async (request, response) => {
         const allUsers = await AuthService.getAllUsers();
@@ -42,3 +42,5 @@ export default class AuthController {
     };
 
 }
+
+module.exports = AuthController;

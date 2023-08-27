@@ -1,12 +1,11 @@
-import User from "../models/user.js";
-
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+const User = require("../models/user");
 
 dotenv.config();
 
-export default class AuthService {
+class AuthService {
 
     static login = async (username, password) => {
         const user = await AuthService.getUserByUsername(username);
@@ -78,3 +77,5 @@ export default class AuthService {
         return token;
     };
 }
+
+module.exports = AuthService;

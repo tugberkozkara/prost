@@ -1,9 +1,9 @@
-import Place from "../models/place.js";
-import AuthService from "./AuthService.js";
-import TagService from "./TagService.js";
-import LocationService from "./LocationService.js";
+const Place = require("../models/place");
+const AuthService = require("./AuthService");
+const TagService = require("./TagService");
+const LocationService = require("./LocationService");
 
-export default class PlaceService{
+class PlaceService{
 
     static getAll = async (tagParams, userParam) => {
         try {
@@ -142,3 +142,5 @@ export default class PlaceService{
     };
 
 }
+
+module.exports = PlaceService;

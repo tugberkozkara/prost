@@ -1,7 +1,7 @@
-import express from "express";
-import bodyParser from "body-parser";
-import AuthController from "../controllers/authController.js";
-import AuthHandler from "../handlers/authHandler.js";
+const express = require("express");
+const bodyParser = require("body-parser");
+const AuthController = require("../controllers/authController");
+const AuthHandler = require("../handlers/authHandler");
 
 var router = express.Router();
 var jsonParser = bodyParser.json();
@@ -10,4 +10,4 @@ router.get("/users", AuthHandler.checkAuth, AuthController.getAllUsers);
 router.post("/register", jsonParser, AuthController.createUser);
 router.post("/login", jsonParser, AuthController.loginUser);
 
-export default router;
+module.exports = router;

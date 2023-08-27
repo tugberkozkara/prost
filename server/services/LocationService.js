@@ -1,6 +1,6 @@
-import Location from "../models/location.js";
+const Location = require("../models/location");
 
-export default class LocationService{
+class LocationService{
 
     static getAll = async () => {
         try {
@@ -66,3 +66,5 @@ export default class LocationService{
         return places.some(place => place.location.some(loc => String(loc._id) === String(id)));
     };
 }
+
+module.exports = LocationService;

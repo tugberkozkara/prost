@@ -1,8 +1,9 @@
-import express from "express";
-import authRouter from "./authRouter.js";
-import placeRouter from "./placeRouter.js";
-import tagRouter from "./tagRouter.js";
-import locationRouter from "./locationRouter.js";
+const express = require("express");
+const authRouter = require("./authRouter");
+const placeRouter = require("./placeRouter");
+const tagRouter = require("./tagRouter");
+const locationRouter = require("./locationRouter");
+
 
 var router = express.Router();
 
@@ -17,4 +18,4 @@ router.use("*", (request, response) => {
     });
 });
 
-export default router;
+module.exports = router;

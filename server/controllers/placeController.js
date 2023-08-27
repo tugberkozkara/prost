@@ -1,6 +1,6 @@
-import PlaceService from "../services/PlaceService.js";
+const PlaceService = require("../services/PlaceService");
 
-export default class PlaceController{
+class PlaceController{
     
     static getAllPlaces = async (request, response) => {
         const tagParams = request.query.tag;
@@ -67,3 +67,5 @@ export default class PlaceController{
     };
 
 }
+
+module.exports = PlaceController;

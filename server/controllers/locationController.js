@@ -1,6 +1,6 @@
-import LocationService from "../services/LocationService.js";
+const LocationService = require("../services/LocationService");
 
-export default class LocationController{
+class LocationController{
 
     static getAllLocations = async (request, response) => {
         const allLocations = await LocationService.getAll();
@@ -39,3 +39,5 @@ export default class LocationController{
         });
     };
 }
+
+module.exports = LocationController;

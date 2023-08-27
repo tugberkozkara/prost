@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-export default class AuthHandler{
+class AuthHandler{
 
     static checkAuth = (request, response, next) => {
         try {
@@ -15,3 +15,5 @@ export default class AuthHandler{
         }
     };
 }
+
+module.exports = AuthHandler;

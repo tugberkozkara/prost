@@ -1,6 +1,6 @@
-import { isValidObjectId } from "mongoose";
+const { isValidObjectId } = require("mongoose");
 
-export default class IDHandler{
+class IDHandler{
     
     static getIdHandler = (request, response, next) => {
         if(!isValidObjectId(request.params.id)){
@@ -11,3 +11,5 @@ export default class IDHandler{
         next();
     };
 }
+
+module.exports = IDHandler;

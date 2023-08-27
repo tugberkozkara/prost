@@ -1,6 +1,6 @@
-import TagService from "../services/TagService.js";
+const TagService = require("../services/TagService");
 
-export default class TagController{
+class TagController{
 
     static getAllTags = async (request, response) => {
         const allTags = await TagService.getAll();
@@ -39,3 +39,5 @@ export default class TagController{
         });
     };
 }
+
+module.exports = TagController;

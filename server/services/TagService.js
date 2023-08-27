@@ -1,6 +1,6 @@
-import Tag from "../models/tag.js";
+const Tag = require("../models/tag");
 
-export default class TagService{
+class TagService{
 
     static getAll = async () => {
         try {
@@ -65,3 +65,5 @@ export default class TagService{
         return places.some(place => place.tags.some(tag => String(tag._id) === String(id)));
     };
 }
+
+module.exports = TagService;
