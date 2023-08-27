@@ -19,7 +19,7 @@ Prost! aims to store good quality cafés and pubs. Apart from cafés and pubs, s
 Users can create their accounts and share places with name, category, location, tags and menu URL information. Tags and locations can be used for filtering.
 
 ## **Stack:**
-**Backend:** Node.js, Express, MongoDB, AWS EC2
+**Backend:** Node.js, Express, MongoDB, AWS Lambda
 </br>
 **Frontend:** React, AWS S3
 </br>
