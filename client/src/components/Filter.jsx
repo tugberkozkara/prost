@@ -97,7 +97,7 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags, activeLocations
   return (
     <>
     <nav className="navbar navbar-light bg-light d-flex row col-lg-6 col-md-8 col-sm-8 mx-auto mb-3 px-1">
-        <a className="navbar-brand w-auto text-muted">Couldn't find your spot?!</a>
+        <div className="navbar-brand w-auto text-muted">Couldn't find your spot?!</div>
         <button className="navbar-toggler w-auto mx-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#filterToggler" aria-controls="filterToggler" aria-expanded="false">
             <span className="bi-filter fs-2"></span>
         </button>
@@ -110,7 +110,7 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags, activeLocations
                     </div>
                     <div className="row">
                         <div className="col-sm">
-                            <a className="nav-link">Locations</a>
+                            <div className="nav-link">Locations</div>
                             {
                                 locations.map((location, i) => {
                                     return (<button key={i} value={location._id} onClick={locationFilterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{location.name}</button>);
@@ -118,7 +118,7 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags, activeLocations
                             }
                         </div>
                         <div className="col-sm">
-                            <a className="nav-link">Tags</a>
+                            <div className="nav-link">Tags</div>
                             {
                                 tags.map((tag, i) => {
                                     return (<button key={i} value={tag._id} onClick={tagFilterHandle} className="btn btn-outline-secondary mx-1 mt-2" name="filterButton">{tag.name}</button>);
