@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postPlace } from '../pages/InsertPlace';
+import { postPlace } from '../../pages/InsertPlace';
 
 const PlaceForm = () => {
 

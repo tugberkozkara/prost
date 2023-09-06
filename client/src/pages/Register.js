@@ -1,5 +1,5 @@
 import axios from 'axios';
-import RegisterForm from "../components/RegisterForm";
+import RegisterForm from "../components/register/RegisterForm";
 import { API_URL_REGISTER } from '../utils/constants';
 
 

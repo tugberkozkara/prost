@@ -1,5 +1,5 @@
 import axios from 'axios';
-import PlaceForm from "../components/PlaceForm";
+import PlaceForm from "../components/insert/PlaceForm";
 import { API_URL_PLACES } from '../utils/constants';
 
 export const postPlace = async (postData, token) => {

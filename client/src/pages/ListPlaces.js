@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-import PlaceCard from '../components/PlaceCard';
-import Filter from '../components/Filter';
-import ProfileHeader from '../components/ProfileHeader';
-import ConstructionAlert from '../components/ConstructionAlert';
+import PlaceCard from '../components/list/PlaceCard';
+import Filter from '../components/list/Filter';
+import ProfileHeader from '../components/list/ProfileHeader';
+import ConstructionAlert from '../components/list/ConstructionAlert';
 import { API_URL_PLACES } from '../utils/constants';
 
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { API_URL_LOCATIONS, API_URL_TAGS } from '../utils/constants';
+import { API_URL_LOCATIONS, API_URL_TAGS } from '../../utils/constants';
 import Search from "./Search";
 import axios from 'axios';
 

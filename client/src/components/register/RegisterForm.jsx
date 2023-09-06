@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { registerUser } from '../pages/Register';
+import { registerUser } from '../../pages/Register';
 
 const RegisterForm = ({ setToken }) => {
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { loginUser } from '../pages/Login';
+import { loginUser } from '../../pages/Login';
 
 const LoginForm = ({ setToken }) => {
 

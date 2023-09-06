@@ -1,5 +1,5 @@
 import React from 'react'
-import underConstrImg from '../media/503.png';
+import underConstrImg from '../../media/503.png';
 
 const ConstructionAlert = () => {
   return (

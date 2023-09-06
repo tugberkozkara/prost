@@ -1,5 +1,5 @@
 import React from 'react'
-import userAvatarIcon from '../media/user-avatar.png';
+import userAvatarIcon from '../../media/user-avatar.png';
 
 const ProfileHeader = ({username, places}) => {
     let tagArray = [];

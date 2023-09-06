@@ -1,15 +1,15 @@
 import React from 'react';
-import Auth from '../utils/auth';
-import { deletePlace } from '../pages/DeletePlace';
+import Auth from '../../utils/auth';
+import { deletePlace } from '../../pages/DeletePlace';
 import { useNavigate } from 'react-router-dom';
 
-import barPubIcon from '../media/bar-pub.png';
-import beerGardenIcon from '../media/beer-garden.png';
-import fineDineIcon from '../media/fine-dine.png';
-import fastFoodIcon from '../media/fast-food.png';
-import coffeeShopIcon from '../media/coffee-shop.png';
-import bakeryIcon from '../media/bakery.png';
-import otherIcon from '../media/beer.png';
+import barPubIcon from '../../media/bar-pub.png';
+import beerGardenIcon from '../../media/beer-garden.png';
+import fineDineIcon from '../../media/fine-dine.png';
+import fastFoodIcon from '../../media/fast-food.png';
+import coffeeShopIcon from '../../media/coffee-shop.png';
+import bakeryIcon from '../../media/bakery.png';
+import otherIcon from '../../media/beer.png';
 
 const PlaceCard = ({ place, filtered, setFiltered }) => {
     

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/login/LoginForm";
 import { API_URL_LOGIN } from '../utils/constants';
 
 
