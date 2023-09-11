@@ -33,7 +33,8 @@ const NavBar = ({ token, setToken }) => {
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                    <NavLink className="nav-item nav-link active mx-2" to="/">Home</NavLink>
+                    <NavLink className="nav-item nav-link mx-2" to="/">Home</NavLink>
+                    <NavLink className="nav-item nav-link mx-2" to="/about">About</NavLink>
                     {token && !isTokenExpired ? (<>
                     <NavLink className="nav-item nav-link mx-2" to="/insert">Insert</NavLink>
                     <NavLink className="col nav-item nav-link mx-2 text-muted" onClick={e => expireToken()}>Logout <span className="col text-muted my-0 pt-2">{username}</span></NavLink>
