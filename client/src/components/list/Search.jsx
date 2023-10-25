@@ -24,7 +24,7 @@ const Search = ({ places, setFiltered }) => {
 
   return (
     <div className="searchbar col-sm-12 my-2">
-        <input className="form-control" id="searchInput" type="text" placeholder="Search" aria-label="Search" onChange={searchHandle} />
+        <input className="form-control" id="searchInput" type="text" placeholder="Couldn't find your spot?!" aria-label="Search" onChange={searchHandle} />
     </div>
   )
 }
