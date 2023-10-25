@@ -26,7 +26,7 @@ const NavBar = ({ token, setToken }) => {
       }, [setToken, token]);
   return (
     <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light px-3 fixed-top">
             <a className="navbar-brand" href="/">Prost!</a>
             <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
             <span className="bi-three-dots fs-2"></span>
@@ -44,7 +44,7 @@ const NavBar = ({ token, setToken }) => {
                 </div>
             </div>
         </nav>
-        <section className="py-5 text-center container">
+        <section className="py-5 text-center container mt-5">
             <div className="row">
                 <div className="col-lg-6 col-md-8 mx-auto">
                     <h1 className="fw-normal ">Prost!</h1>
