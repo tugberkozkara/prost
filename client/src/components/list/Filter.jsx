@@ -97,7 +97,9 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags, activeLocations
   return (
     <>
     <nav className="navbar navbar-light bg-light d-flex row col-lg-6 col-md-8 col-sm-8 mx-auto mb-3 px-1">
-        <div className="navbar-brand w-auto text-muted">Couldn't find your spot?!</div>
+        <div className="navbar-brand col-9 col-md-10 me-0 py-0">
+            <Search places={places} setFiltered={setFiltered} />
+        </div>
         <button className="navbar-toggler w-auto mx-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#filterToggler" aria-controls="filterToggler" aria-expanded="false">
             <span className="bi-filter fs-2"></span>
         </button>
@@ -105,9 +107,6 @@ const Filter = ({places, setFiltered, activeTags, setActiveTags, activeLocations
         <div className="collapse navbar-collapse" id="filterToggler">
             <div className="navbar-nav">
                 <div className="container mt-3 nav-item navbar-nav-scroll" style={{"--bs-scroll-height":"40vh"}}>
-                    <div className="row">
-                        <Search places={places} setFiltered={setFiltered} />
-                    </div>
                     <div className="row">
                         <div className="col-sm">
                             <div className="nav-link">Locations</div>
